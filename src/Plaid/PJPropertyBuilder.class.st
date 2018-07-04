@@ -1,3 +1,15 @@
+"
+I am a builder of key-value pairs that can be passed to the JavaScript land using Seaside machinery. I provide interace to put scalars and blocks. There are two varieties of callbacks that I suppport - direct, which uses window.location, and ajax, which wraps an ajax call inside a function...
+
+I do need a rendering context, here's how you can play with me:
+| builder |
+builder := PJPropertyBuilder on: self renderContext.
+builder
+	at: #scalar put: aScalarValue;
+	at: #collection putCollection: aCollection;
+	at: #callback putCallback: [ self halt ];
+	at: #ajaxCallback putAjaxCallback: [ :someValue | self halt ].
+"
 Class {
 	#name : #PJPropertyBuilder,
 	#superclass : #Object,
