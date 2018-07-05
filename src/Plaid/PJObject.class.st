@@ -8,7 +8,7 @@ Subclass me, and add whatever magritte descriptions you need to support JSON con
 Class {
 	#name : #PJObject,
 	#superclass : #GRObject,
-	#category : #'Plaid-Web'
+	#category : #'Plaid-Models'
 }
 
 { #category : #descriptions }
