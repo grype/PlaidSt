@@ -21,6 +21,11 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #default }
+PJTransaction class >> defaultCurrencyCode [
+	^ 'USD'
+]
+
 { #category : #accessing }
 PJTransaction >> accountId [
 	^ accountId
@@ -58,6 +63,7 @@ PJTransaction >> accountOwnerDescription [
 		label: 'Account owner';
 		accessor: #accountOwner;
 		jsonName: #'account_owner';
+		beOptional;
 		yourself
 ]
 
@@ -98,6 +104,7 @@ PJTransaction >> categoryDescription [
 		label: 'Category';
 		accessor: #category;
 		jsonName: #category;
+		beOptional;
 		yourself
 ]
 
@@ -118,6 +125,7 @@ PJTransaction >> categoryIdDescription [
 		label: 'Category ID';
 		accessor: #categoryId;
 		jsonName: #'category_id';
+		beOptional;
 		yourself
 ]
 
@@ -158,6 +166,7 @@ PJTransaction >> isoCurrencyCodeDescription [
 		label: 'ISO Currency Code';
 		accessor: #isoCurrencyCode;
 		jsonName: #'iso_currency_code';
+		beOptional;
 		yourself
 ]
 
@@ -179,6 +188,7 @@ PJTransaction >> locationDescription [
 		accessor: #location;
 		jsonName: #location;
 		classes: { PJLocation };
+		beOptional;
 		yourself
 ]
 
@@ -199,6 +209,7 @@ PJTransaction >> nameDescription [
 		label: 'Name';
 		accessor: #name;
 		jsonName: #name;
+		beOptional;
 		yourself
 ]
 
@@ -220,6 +231,7 @@ PJTransaction >> paymentMetaDescription [
 		accessor: #paymentMeta;
 		jsonName: #payment_meta;
 		classes: { PJPaymentMeta };
+		beOptional;
 		yourself
 ]
 
@@ -260,12 +272,13 @@ PJTransaction >> pendingTransactionIdDescription [
 		label: 'Pending Transaction ID';
 		accessor: #pendingTransactionId;
 		jsonName: #'pending_transaction_id';
+		beOptional;
 		yourself
 ]
 
 { #category : #printing }
 PJTransaction >> printCurrencyCode [
-	^ isoCurrencyCode ifNil: [ unofficialCurrencyCode ]
+	^ isoCurrencyCode ifNil: [ unofficialCurrencyCode ifNil: [ self class defaultCurrencyCode ] ]
 ]
 
 { #category : #printing }
@@ -276,10 +289,11 @@ PJTransaction >> printName [
 { #category : #printing }
 PJTransaction >> printOn: aStream [
 	^ aStream
-		nextPutAll: self printName;
-		nextPutAll: ' (';
+		nextPutAll: self printName greaseString;
+		nextPutAll: ' ($';
 		nextPutAll: self amount greaseString;
-		nextPutAll: self printCurrencyCode;
+		nextPut: Character space;
+		nextPutAll: self printCurrencyCode greaseString;
 		nextPutAll: ')'
 ]
 
@@ -340,5 +354,6 @@ PJTransaction >> unofficialCurrencyCodeDescription [
 		label: 'Unofficial Currency Code';
 		accessor: #unofficialCurrencyCode;
 		jsonName: #'unofficial_currency_code';
+		beOptional;
 		yourself
 ]

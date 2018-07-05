@@ -27,6 +27,7 @@ PJError >> codeDescription [
 		label: 'Code';
 		accessor: #code;
 		jsonName: #error_code;
+		beOptional;
 		yourself
 ]
 
@@ -47,6 +48,7 @@ PJError >> displayMessageDescription [
 		label: 'Display Message';
 		accessor: #displayMessage;
 		jsonName: #display_message;
+		beOptional;
 		yourself
 ]
 
@@ -67,6 +69,7 @@ PJError >> messageDescription [
 		label: 'Message';
 		accessor: #message;
 		jsonName: #error_message;
+		beOptional;
 		yourself
 ]
 
@@ -87,5 +90,6 @@ PJError >> typeDescription [
 		label: 'Type';
 		accessor: #type;
 		jsonName: #error_type;
+		beOptional;
 		yourself
 ]

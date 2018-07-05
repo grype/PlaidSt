@@ -51,7 +51,17 @@ PJAccount >> balancesDescription [
 		accessor: #balances;
 		jsonName: #balances;
 		classes: { PJAccountBalances };
+		beOptional;
 		yourself
+]
+
+{ #category : #printing }
+PJAccount >> balancesPrintString [
+	^ '{1}/{2}/{3}'
+		format:
+			{(self balances available ifNil: [ 'NA' ]).
+			(self balances current ifNil: [ 'NA' ]).
+			(self balances limit ifNil: [ 'NA' ])}
 ]
 
 { #category : #accessing }
@@ -91,6 +101,7 @@ PJAccount >> nameDescription [
 		label: 'Name';
 		accessor: #name;
 		jsonName: #name;
+		beOptional;
 		yourself
 ]
 
@@ -111,6 +122,7 @@ PJAccount >> officialNameDescription [
 		label: 'Official Name';
 		accessor: #officialName;
 		jsonName: #'official_name';
+		beOptional;
 		yourself
 ]
 
@@ -121,7 +133,13 @@ PJAccount >> printName [
 
 { #category : #printing }
 PJAccount >> printOn: aStream [
-	aStream nextPutAll: self printName
+	aStream
+		nextPutAll: self printName;
+		nextPutAll: ' ...';
+		nextPutAll: self mask;
+		nextPutAll: ' (';
+		nextPutAll: self balancesPrintString;
+		nextPutAll: ')'
 ]
 
 { #category : #accessing }
@@ -141,6 +159,7 @@ PJAccount >> subtypeDescription [
 		label: 'Subtype';
 		accessor: #subtype;
 		jsonName: #subtype;
+		beOptional;
 		yourself
 ]
 
@@ -161,5 +180,6 @@ PJAccount >> typeDescription [
 		label: 'Type';
 		accessor: #type;
 		jsonName: #type;
+		beOptional;
 		yourself
 ]

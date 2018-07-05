@@ -55,10 +55,14 @@ PJItem >> billedProductsDescription [
 { #category : #description }
 PJItem >> errorDescription [
 	<magritteDescription>
-	^ MAToOneRelationDescription new
+	^ MAElementDescription new
 		label: 'Error';
-		accessor: #itemError;
+		accessor:
+			(MAPluggableAccessor
+				read: [ :obj | obj itemError ]
+				write: [ :obj :val | val ifNotNil: [ obj itemError: val ] ]);
 		jsonName: #error;
+		beOptional;
 		yourself
 ]
 
@@ -129,5 +133,6 @@ PJItem >> webhookDescription [
 		label: 'Webhook';
 		accessor: #webhook;
 		jsonName: #webhook;
+		beOptional;
 		yourself
 ]

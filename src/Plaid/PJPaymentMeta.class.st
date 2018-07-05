@@ -31,6 +31,7 @@ PJPaymentMeta >> byOrderOfDescription [
 		label: 'By Order Of';
 		accessor: #byOrderOf;
 		jsonName: #by_order_of;
+		beOptional;
 		yourself
 ]
 
@@ -51,6 +52,7 @@ PJPaymentMeta >> payeeDescription [
 		label: 'Payee';
 		accessor: #payee;
 		jsonName: #payee;
+		beOptional;
 		yourself
 ]
 
@@ -71,6 +73,7 @@ PJPaymentMeta >> payerDescription [
 		label: 'Payer';
 		accessor: #payer;
 		jsonName: #payer;
+		beOptional;
 		yourself
 ]
 
@@ -91,6 +94,7 @@ PJPaymentMeta >> paymentMethodDescription [
 		label: 'Payment Method';
 		accessor: #paymentMethod;
 		jsonName: #payment_method;
+		beOptional;
 		yourself
 ]
 
@@ -111,6 +115,7 @@ PJPaymentMeta >> paymentProcessorDescription [
 		label: 'Payment Processor';
 		accessor: #paymentProcessor;
 		jsonName: #payment_processor;
+		beOptional;
 		yourself
 ]
 
@@ -131,6 +136,7 @@ PJPaymentMeta >> ppdIdDescription [
 		label: 'PPD ID';
 		accessor: #ppdId;
 		jsonName: #ppd_id;
+		beOptional;
 		yourself
 ]
 
@@ -151,6 +157,7 @@ PJPaymentMeta >> reasonDescription [
 		label: 'Reason';
 		accessor: #reason;
 		jsonName: #reason;
+		beOptional;
 		yourself
 ]
 
@@ -171,5 +178,6 @@ PJPaymentMeta >> referenceNumberDescription [
 		label: 'Reference Number';
 		accessor: #referenceNumber;
 		jsonName: #reference_number;
+		beOptional;
 		yourself
 ]

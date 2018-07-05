@@ -188,5 +188,5 @@ PlaidClient >> transactionsFrom: startDate to: endDate options: options [
 		at: 'end_date' put: endDate asPlaidString;
 		yourself.
 	options ifNotNil: [ :value | endpoint at: 'options' put: value ].
-	^ endpoint post
+	^ PJTransactionsResponse fromJson: endpoint post
 ]

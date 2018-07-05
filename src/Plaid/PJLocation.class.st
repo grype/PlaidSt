@@ -30,6 +30,7 @@ PJLocation >> addressDescription [
 		label: 'Address';
 		accessor: #address;
 		jsonName: #address;
+		beOptional;
 		yourself
 ]
 
@@ -50,6 +51,7 @@ PJLocation >> cityDescription [
 		label: 'City';
 		accessor: #city;
 		jsonName: #city;
+		beOptional;
 		yourself
 ]
 
@@ -70,6 +72,7 @@ PJLocation >> latitudeDescription [
 		label: 'Latitude';
 		accessor: #latitude;
 		jsonName: #lat;
+		beOptional;
 		yourself
 ]
 
@@ -90,6 +93,7 @@ PJLocation >> longitudeDescription [
 		label: 'Longitude';
 		accessor: #longitude;
 		jsonName: #lon;
+		beOptional;
 		yourself
 ]
 
@@ -110,7 +114,18 @@ PJLocation >> stateDescription [
 		label: 'State';
 		accessor: #state;
 		jsonName: #state;
+		beOptional;
 		yourself
+]
+
+{ #category : #accessing }
+PJLocation >> storeNumber [
+	^ storeNumber
+]
+
+{ #category : #accessing }
+PJLocation >> storeNumber: anObject [
+	storeNumber := anObject
 ]
 
 { #category : #description }
@@ -120,6 +135,7 @@ PJLocation >> storeNumberDescription [
 		label: 'Store Number';
 		accessor: #storeNumber;
 		jsonName: #'store_number';
+		beOptional;
 		yourself
 ]
 
@@ -140,5 +156,6 @@ PJLocation >> zipDescription [
 		label: 'ZIP';
 		accessor: #zip;
 		jsonName: #zip;
+		beOptional;
 		yourself
 ]
