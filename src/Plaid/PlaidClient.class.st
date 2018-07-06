@@ -177,6 +177,17 @@ PlaidClient >> isSandboxEnvironment [
 ]
 
 { #category : #endpoints }
+PlaidClient >> item [
+	| endpoint |
+	endpoint := (self / 'item' / 'get')
+		withClientId;
+		withSecret;
+		withAccessToken;
+		yourself.
+	^ PJItemResponse fromJson: endpoint post
+]
+
+{ #category : #endpoints }
 PlaidClient >> transactionsFrom: startDate to: endDate accountIds: aListOfAccountIds count: aCount offset: anOffset [
 	| options |
 	options := Dictionary new.
