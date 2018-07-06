@@ -130,12 +130,13 @@ PlaidClient >> environment [
 ]
 
 { #category : #endpoints }
-PlaidClient >> exchangePublicToken: aPublicToken [ 
-	^ (self / 'item' / 'public_token' / 'exchange')
+PlaidClient >> exchangePublicToken: aPublicToken [
+	| endpoint |
+	endpoint := (self / 'item' / 'public_token' / 'exchange')
 		withClientId;
 		withSecret;
-		at: 'public_token' put: aPublicToken;
-		post
+		at: 'public_token' put: aPublicToken.
+	^ PJItemAccessResponse fromJson: endpoint post
 ]
 
 { #category : #initialization }
