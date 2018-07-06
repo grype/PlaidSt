@@ -1,6 +1,6 @@
 Class {
 	#name : #PJTransactionsResponse,
-	#superclass : #PJObject,
+	#superclass : #PJResponse,
 	#instVars : [
 		'item',
 		'accounts',

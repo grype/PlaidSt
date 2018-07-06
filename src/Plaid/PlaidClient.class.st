@@ -139,17 +139,19 @@ PlaidClient >> initializeWithUrl: aUrl [
 
 { #category : #endpoints }
 PlaidClient >> institutions [
-	^ self institutions: 200 offset: 0 
+	^ self institutions: 10 offset: 0 
 ]
 
 { #category : #endpoints }
 PlaidClient >> institutions: aCount offset: anOffset [
-	^ (self / 'institutions' / 'get')
+	| endpoint |
+	endpoint := (self / 'institutions' / 'get')
 		withClientId;
 		withSecret;
 		at: 'count' put: aCount;
 		at: 'offset' put: anOffset;
-		post
+		yourself.
+	^ PJInstitutionsResponse fromJson: endpoint post
 ]
 
 { #category : #testing }
