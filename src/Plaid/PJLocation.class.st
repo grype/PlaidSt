@@ -55,6 +55,21 @@ PJLocation >> cityDescription [
 		yourself
 ]
 
+{ #category : #testing }
+PJLocation >> hasAddress [
+	^ ({ address. city. state. zip } asSet reject: #isNil) size > 0
+]
+
+{ #category : #testing }
+PJLocation >> hasGeolocation [
+	^ latitude isNotNil and: [ longitude isNotNil  ]
+]
+
+{ #category : #testing }
+PJLocation >> isValid [
+	^ self hasGeolocation or: [ self hasAddress ]
+]
+
 { #category : #accessing }
 PJLocation >> latitude [
 	^ latitude
@@ -95,6 +110,20 @@ PJLocation >> longitudeDescription [
 		jsonName: #lon;
 		beOptional;
 		yourself
+]
+
+{ #category : #printing }
+PJLocation >> printAddress [
+	^ ({ address. city. state. zip } reject: #isNil) joinUsing: ' '
+]
+
+{ #category : #printing }
+PJLocation >> printOn: aStream [
+	self printAddress
+		ifEmpty: [ self hasGeolocation
+				ifTrue: [ aStream nextPutAll: 'Geolocation' ]
+				ifFalse: [ aStream nextPutAll: 'Invalid Location' ] ]
+		ifNotEmpty: [ :value | aStream nextPutAll: value ]
 ]
 
 { #category : #accessing }

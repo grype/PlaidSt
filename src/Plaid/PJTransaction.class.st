@@ -149,6 +149,11 @@ PJTransaction >> dateDescription [
 		yourself
 ]
 
+{ #category : #testing }
+PJTransaction >> hasLocation [
+	^ location isNotNil and: [ location isValid ]
+]
+
 { #category : #accessing }
 PJTransaction >> isoCurrencyCode [
 	^ isoCurrencyCode
@@ -288,13 +293,15 @@ PJTransaction >> printName [
 
 { #category : #printing }
 PJTransaction >> printOn: aStream [
-	^ aStream
+	aStream
 		nextPutAll: self printName greaseString;
 		nextPutAll: ' ($';
 		nextPutAll: self amount greaseString;
 		nextPut: Character space;
 		nextPutAll: self printCurrencyCode greaseString;
-		nextPutAll: ')'
+		nextPutAll: ')'.
+	
+	self hasLocation ifTrue: [ aStream nextPutAll: ' <*>' ]
 ]
 
 { #category : #accessing }
