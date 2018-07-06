@@ -116,6 +116,16 @@ PJInstitution >> nameDescription [
 		yourself
 ]
 
+{ #category : #printing }
+PJInstitution >> printName [
+	^ self name
+]
+
+{ #category : #printing }
+PJInstitution >> printOn: aStream [
+	aStream nextPutAll: self printName
+]
+
 { #category : #accessing }
 PJInstitution >> products [
 	^ products

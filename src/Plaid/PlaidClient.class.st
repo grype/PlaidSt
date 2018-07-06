@@ -161,6 +161,19 @@ PlaidClient >> institutions: aCount offset: anOffset [
 	^ PJInstitutionsResponse fromJson: endpoint post
 ]
 
+{ #category : #endpoints }
+PlaidClient >> institutionsMatching: aQueryString products: aListOfProducts [
+	"Searches institutions that match aQueryString in the name. If products are given, the results will be limited to those institutions that provide all of the given products."
+
+	| endpoint |
+	endpoint := (self / 'institutions' / 'search')
+		withPublicKey;
+		yourself.
+	endpoint at: 'query' put: aQueryString greaseString.
+	endpoint at: 'products' put: aListOfProducts.
+	^ PJInstitutionsResponse fromJson: endpoint post
+]
+
 { #category : #testing }
 PlaidClient >> isDevelopmentEnvironment [
 	^ self baseUrl = DevelopmentUrl  
