@@ -91,6 +91,17 @@ PlaidClient >> accounts [
 	^ PJAccountsResponse fromJson: endpoint post
 ]
 
+{ #category : #endpoints }
+PlaidClient >> auth [
+	| endpoint |
+	endpoint := (self / 'auth' / 'get')
+		withClientId;
+		withSecret;
+		withAccessToken;
+		yourself.
+	^ PJAuthResponse fromJson: endpoint post
+]
+
 { #category : #accessing }
 PlaidClient >> baseUrl [
 	^ baseUrl
