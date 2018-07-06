@@ -85,6 +85,13 @@ PlaidClient >> baseUrl [
 	^ baseUrl
 ]
 
+{ #category : #endpoints }
+PlaidClient >> categories [
+	| endpoint |
+	endpoint := self / 'categories' / 'get'.
+	^ PJCategoriesResponse fromJson: endpoint post
+]
+
 { #category : #accessing }
 PlaidClient >> clientName [
 	^ clientName
