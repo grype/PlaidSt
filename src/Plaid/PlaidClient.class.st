@@ -80,6 +80,17 @@ PlaidClient >> / aPath [
 	^ PlaidEndpoint withClient: self url: self baseUrl / aPath
 ]
 
+{ #category : #endpoints }
+PlaidClient >> accounts [
+	| endpoint |
+	endpoint := (self / 'accounts' / 'get')
+		withClientId;
+		withSecret;
+		withAccessToken;
+		yourself.
+	^ PJAccountsResponse fromJson: endpoint post
+]
+
 { #category : #accessing }
 PlaidClient >> baseUrl [
 	^ baseUrl
