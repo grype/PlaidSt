@@ -128,7 +128,7 @@ PlaidEndpoint >> withAccessToken [
 
 { #category : #configuring }
 PlaidEndpoint >> withClientId [ 
-	self client credentials clientID ifNotNil: [ :value | self at: 'client_id' put: value ]
+	self client credentials clientId ifNotNil: [ :value | self at: 'client_id' put: value ]
 ]
 
 { #category : #configuring }

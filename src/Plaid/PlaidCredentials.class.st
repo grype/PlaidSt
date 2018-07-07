@@ -19,8 +19,8 @@ Class {
 	#instVars : [
 		'publicKey',
 		'secret',
-		'clientID',
-		'accessToken'
+		'accessToken',
+		'clientId'
 	],
 	#category : #'Plaid-Client'
 }
@@ -36,13 +36,13 @@ PlaidCredentials >> accessToken: anObject [
 ]
 
 { #category : #accessing }
-PlaidCredentials >> clientID [
-	^ clientID
+PlaidCredentials >> clientId [
+	^ clientId
 ]
 
 { #category : #accessing }
-PlaidCredentials >> clientID: anObject [
-	clientID := anObject
+PlaidCredentials >> clientId: anObject [
+	clientId := anObject
 ]
 
 { #category : #accessing }
