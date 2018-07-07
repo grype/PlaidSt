@@ -47,7 +47,7 @@ Class {
 
 { #category : #'instance creation' }
 PlaidClient class >> development [
-	^ self with: DevelopmentUrl
+	^ self withUrl: DevelopmentUrl
 ]
 
 { #category : #initialize }
@@ -62,16 +62,16 @@ PlaidClient class >> initialize [
 
 { #category : #'instance creation' }
 PlaidClient class >> production [
-	^ self with: ProductionUrl
+	^ self withUrl: ProductionUrl
 ]
 
 { #category : #'instance creation' }
 PlaidClient class >> sandbox [
-	^ self with: SandboxUrl
+	^ self withUrl: SandboxUrl
 ]
 
 { #category : #'instance creation' }
-PlaidClient class >> with: aUrl [
+PlaidClient class >> withUrl: aUrl [
 	^ self basicNew initializeWithUrl: aUrl
 ]
 
