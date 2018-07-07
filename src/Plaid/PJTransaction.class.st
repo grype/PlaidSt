@@ -154,6 +154,11 @@ PJTransaction >> hasLocation [
 	^ location isNotNil and: [ location isValid ]
 ]
 
+{ #category : #comparing }
+PJTransaction >> hash [
+	^ transactionId hash bitXor: accountId hash
+]
+
 { #category : #accessing }
 PJTransaction >> isoCurrencyCode [
 	^ isoCurrencyCode

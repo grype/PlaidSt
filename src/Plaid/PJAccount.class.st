@@ -64,6 +64,11 @@ PJAccount >> balancesPrintString [
 			(self balances limit ifNil: [ 'NA' ])}
 ]
 
+{ #category : #comparing }
+PJAccount >> hash [
+	^ accountId hash
+]
+
 { #category : #accessing }
 PJAccount >> mask [
 	^ mask

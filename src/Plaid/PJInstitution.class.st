@@ -55,6 +55,11 @@ PJInstitution >> hasMfaDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJInstitution >> hash [
+	^ institutionId hash
+]
+
 { #category : #accessing }
 PJInstitution >> institutionId [
 	^ institutionId

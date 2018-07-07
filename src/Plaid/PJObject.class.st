@@ -11,6 +11,13 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PJObject >> = another [
+	^ (another isKindOf: self class)
+		ifTrue: [ self hash = another hash ]
+		ifFalse: [ false ]
+]
+
 { #category : #descriptions }
 PJObject >> magritteDescription [
 	^ super magritteDescription

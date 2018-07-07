@@ -49,6 +49,11 @@ PJCategory >> groupDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJCategory >> hash [
+	^ categoryId hash
+]
+
 { #category : #accessing }
 PJCategory >> hierarchy [
 	^ hierarchy

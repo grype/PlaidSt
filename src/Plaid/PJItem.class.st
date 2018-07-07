@@ -66,6 +66,11 @@ PJItem >> errorDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJItem >> hash [
+	^ itemId hash
+]
+
 { #category : #accessing }
 PJItem >> institutionId [
 	^ institutionId

@@ -50,6 +50,11 @@ PJAccountNumbers >> accountNumberDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJAccountNumbers >> hash [
+	^ accountId hash
+]
+
 { #category : #printing }
 PJAccountNumbers >> printOn: aStream [
 	aStream
