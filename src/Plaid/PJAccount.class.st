@@ -59,8 +59,8 @@ PJAccount >> balancesDescription [
 PJAccount >> balancesPrintString [
 	^ '{1}/{2}/{3}'
 		format:
-			{(self balances available ifNil: [ 'NA' ]).
-			(self balances current ifNil: [ 'NA' ]).
+			{(self balances current ifNil: [ 'NA' ]).
+			(self balances available ifNil: [ 'NA' ]).
 			(self balances limit ifNil: [ 'NA' ])}
 ]
 
