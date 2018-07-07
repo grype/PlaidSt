@@ -50,6 +50,16 @@ PlaidClient class >> development [
 	^ self withUrl: DevelopmentUrl
 ]
 
+{ #category : #accessing }
+PlaidClient class >> developmentEnvironment [
+	^ DevelopmentEnvironment
+]
+
+{ #category : #accessing }
+PlaidClient class >> developmentUrl [
+	^ DevelopmentUrl
+]
+
 { #category : #initialize }
 PlaidClient class >> initialize [
 	SandboxEnvironment := 'sandbox'.
@@ -65,9 +75,29 @@ PlaidClient class >> production [
 	^ self withUrl: ProductionUrl
 ]
 
+{ #category : #accessing }
+PlaidClient class >> productionEnvironment [
+	^ ProductionEnvironment
+]
+
+{ #category : #accessing }
+PlaidClient class >> productionUrl [
+	^ ProductionUrl
+]
+
 { #category : #'instance creation' }
 PlaidClient class >> sandbox [
 	^ self withUrl: SandboxUrl
+]
+
+{ #category : #accessing }
+PlaidClient class >> sandboxEnvironment [
+	^ SandboxEnvironment
+]
+
+{ #category : #accessing }
+PlaidClient class >> sandboxUrl [
+	^ SandboxUrl
 ]
 
 { #category : #'instance creation' }
