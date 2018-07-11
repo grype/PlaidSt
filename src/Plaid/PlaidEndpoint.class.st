@@ -20,12 +20,12 @@ PlaidEndpoint >> / aPath [
 	^ PlaidEndpoint withClient: client url: self url / aPath
 ]
 
-{ #category : #operations }
+{ #category : #accessing }
 PlaidEndpoint >> allowedHttpMethods [
 	^ #(#head #get #post #put #patch #delete #trace)
 ]
 
-{ #category : #configuring }
+{ #category : #data }
 PlaidEndpoint >> at: aPropertyName put: aValue [
 	data at: aPropertyName put: aValue
 ]
@@ -35,12 +35,12 @@ PlaidEndpoint >> client [
 	^ client
 ]
 
-{ #category : #operations }
-PlaidEndpoint >> configure [
+{ #category : #http }
+PlaidEndpoint >> configureHttpClient [
 	self httpClient url: url
 ]
 
-{ #category : #operations }
+{ #category : #accessing }
 PlaidEndpoint >> data [
 	^ data
 ]
@@ -50,17 +50,17 @@ PlaidEndpoint >> data: anObject [
 	data := anObject
 ]
 
-{ #category : #operations }
+{ #category : #'http requests' }
 PlaidEndpoint >> delete [
 	^ self perform: #delete dataInQuery: false
 ]
 
-{ #category : #operations }
+{ #category : #'http requests' }
 PlaidEndpoint >> get [
 	^ self perform: #post dataInQuery: true
 ]
 
-{ #category : #operations }
+{ #category : #'response handling' }
 PlaidEndpoint >> handleHttpError [
 	| http response |
 	http := self httpClient.
@@ -83,12 +83,12 @@ PlaidEndpoint >> initializeWithClient: aClient url: aUrl [
 	data := Dictionary new
 ]
 
-{ #category : #operations }
+{ #category : #'http requests' }
 PlaidEndpoint >> patch [
 	^ self perform: #patch dataInQuery: false
 ]
 
-{ #category : #operations }
+{ #category : #'http requests' }
 PlaidEndpoint >> perform: anHttpMethod dataInQuery: useQuery [
 	| http result method |
 
@@ -96,7 +96,7 @@ PlaidEndpoint >> perform: anHttpMethod dataInQuery: useQuery [
 
 	method ifNil: [ Error signal: ('Tried to perform invalid HTTP Method "{1}"' format: {anHttpMethod}) ].
 
-	self configure.
+	self configureHttpClient.
 	http := self httpClient.
 	self data
 		ifNotNil: [ :d | 
@@ -108,17 +108,17 @@ PlaidEndpoint >> perform: anHttpMethod dataInQuery: useQuery [
 	^ result
 ]
 
-{ #category : #operations }
+{ #category : #'http requests' }
 PlaidEndpoint >> post [
 	^ self perform: #post dataInQuery: false
 ]
 
-{ #category : #operations }
+{ #category : #'http requests' }
 PlaidEndpoint >> put [
 	^ self perform: #put dataInQuery: false
 ]
 
-{ #category : #configuring }
+{ #category : #data }
 PlaidEndpoint >> remove: aPropertyName [
 	data remove: aPropertyName ifAbsent: [  ]
 ]
@@ -128,29 +128,29 @@ PlaidEndpoint >> url [
 	^ url
 ]
 
-{ #category : #operations }
+{ #category : #http }
 PlaidEndpoint >> validateHttpMethod: anHttpMethod [
 	| method |
 	method := anHttpMethod asLowercase.
 	^ (self allowedHttpMethods includes: method) ifTrue: [ method asSymbol ] ifFalse: [ nil ]
 ]
 
-{ #category : #configuring }
+{ #category : #data }
 PlaidEndpoint >> withAccessToken [
 	self client credentials accessToken ifNotNil: [ :value | self at: 'access_token' put: value ]
 ]
 
-{ #category : #configuring }
+{ #category : #data }
 PlaidEndpoint >> withClientId [ 
 	self client credentials clientId ifNotNil: [ :value | self at: 'client_id' put: value ]
 ]
 
-{ #category : #configuring }
+{ #category : #data }
 PlaidEndpoint >> withPublicKey [
 	self client credentials publicKey ifNotNil: [ :value | self at: 'public_key' put: value ]
 ]
 
-{ #category : #configuring }
+{ #category : #data }
 PlaidEndpoint >> withSecret [
 	self client credentials secret ifNotNil: [ :value | self at: 'secret' put: value ]
 ]
