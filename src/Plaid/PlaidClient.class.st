@@ -199,32 +199,7 @@ PlaidClient >> initializeWithUrl: aUrl [
 
 { #category : #endpoints }
 PlaidClient >> institutions [
-	^ self institutions: 10 offset: 0 
-]
-
-{ #category : #endpoints }
-PlaidClient >> institutions: aCount offset: anOffset [
-	| endpoint |
-	endpoint := (self / 'institutions' / 'get')
-		withClientId;
-		withSecret;
-		at: 'count' put: aCount;
-		at: 'offset' put: anOffset;
-		yourself.
-	^ PJInstitutionsResponse fromJson: endpoint post
-]
-
-{ #category : #endpoints }
-PlaidClient >> institutionsMatching: aQueryString products: aListOfProducts [
-	"Searches institutions that match aQueryString in the name. If products are given, the results will be limited to those institutions that provide all of the given products."
-
-	| endpoint |
-	endpoint := (self / 'institutions' / 'search')
-		withPublicKey;
-		yourself.
-	endpoint at: 'query' put: aQueryString greaseString.
-	endpoint at: 'products' put: aListOfProducts.
-	^ PJInstitutionsResponse fromJson: endpoint post
+	^ PlaidInstitutionsEndpoint withClient: self
 ]
 
 { #category : #testing }
