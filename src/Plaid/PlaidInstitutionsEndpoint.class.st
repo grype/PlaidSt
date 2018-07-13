@@ -4,12 +4,9 @@ Class {
 	#category : #'Plaid-Client'
 }
 
-{ #category : #'instance creation' }
-PlaidInstitutionsEndpoint class >> withClient: aClient [
-	^ (self basicNew initializeWithClient: aClient url: aClient baseUrl / 'institutions')
-		withClientId;
-		withSecret;
-		yourself
+{ #category : #accessing }
+PlaidInstitutionsEndpoint class >> urlOn: aClient [
+	^ (super urlOn: aClient) / 'institutions'
 ]
 
 { #category : #api }
@@ -29,7 +26,7 @@ PlaidInstitutionsEndpoint >> processInstitutionsFromResponse: aResponse [
 ]
 
 { #category : #api }
-PlaidInstitutionsEndpoint >> query: aQuery products: aCollectionOfProducts [
+PlaidInstitutionsEndpoint >> search: aQuery products: aCollectionOfProducts [
 	| endpoint |
 
 	endpoint := (PlaidInstitutionsSearchEndpoint withClient: self client)

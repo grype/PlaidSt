@@ -28,9 +28,8 @@ Instance Variables
 "
 Class {
 	#name : #PlaidClient,
-	#superclass : #Object,
+	#superclass : #Unrest,
 	#instVars : [
-		'baseUrl',
 		'credentials',
 		'clientName'
 	],
@@ -58,6 +57,11 @@ PlaidClient class >> developmentEnvironment [
 { #category : #accessing }
 PlaidClient class >> developmentUrl [
 	^ DevelopmentUrl
+]
+
+{ #category : #defaults }
+PlaidClient class >> endpointClass [
+	^ PlaidEndpoint
 ]
 
 { #category : #initialize }
@@ -100,16 +104,6 @@ PlaidClient class >> sandboxUrl [
 	^ SandboxUrl
 ]
 
-{ #category : #'instance creation' }
-PlaidClient class >> withUrl: aUrl [
-	^ self basicNew initializeWithUrl: aUrl
-]
-
-{ #category : #endpoints }
-PlaidClient >> / aPath [
-	^ PlaidEndpoint withClient: self url: self baseUrl / aPath
-]
-
 { #category : #endpoints }
 PlaidClient >> accounts [
 	| endpoint |
@@ -132,15 +126,10 @@ PlaidClient >> auth [
 	^ PJAuthResponse fromJson: endpoint post
 ]
 
-{ #category : #accessing }
-PlaidClient >> baseUrl [
-	^ baseUrl
-]
-
 { #category : #endpoints }
 PlaidClient >> categories [
 	| endpoint |
-	endpoint := self / 'categories' / 'get'.
+	endpoint := self / 'categories/get'.
 	^ PJCategoriesResponse fromJson: endpoint post
 ]
 
@@ -152,14 +141,6 @@ PlaidClient >> clientName [
 { #category : #accessing }
 PlaidClient >> clientName: anObject [
 	clientName := anObject
-]
-
-{ #category : #private }
-PlaidClient >> createHttpClient [
-	^ ZnClient new
-		url: baseUrl;
-		contentWriter: [ :obj | ZnEntity json: obj asJson ]
-		yourself
 ]
 
 { #category : #accessing }
@@ -191,10 +172,10 @@ PlaidClient >> exchangePublicToken: aPublicToken [
 	^ PJItemAccessResponse fromJson: endpoint post
 ]
 
-{ #category : #initialization }
-PlaidClient >> initializeWithUrl: aUrl [
-	self initialize.
-	baseUrl := aUrl
+{ #category : #private }
+PlaidClient >> initialize [
+	super initialize.
+	self contentWriter: [ :obj | ZnEntity json: obj asJson ]
 ]
 
 { #category : #endpoints }

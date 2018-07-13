@@ -1,6 +1,6 @@
 Class {
-	#name : #PlaidClientError,
-	#superclass : #Error,
+	#name : #PlaidResponseError,
+	#superclass : #UnrestError,
 	#instVars : [
 		'response'
 	],
@@ -8,23 +8,18 @@ Class {
 }
 
 { #category : #'instance creation' }
-PlaidClientError class >> withResponse: aResponse [
+PlaidResponseError class >> withResponse: aResponse [
 	^ self basicNew initializeWithResponse: aResponse
 ]
 
 { #category : #initialization }
-PlaidClientError >> initializeWithResponse: aResponse [
+PlaidResponseError >> initializeWithResponse: aResponse [
 	self initialize.
 	response := aResponse.
 	messageText := response displayMessage ifNil: [ response errorMessage ]
 ]
 
-{ #category : #private }
-PlaidClientError >> isResumable [
-	^ true
-]
-
 { #category : #accessing }
-PlaidClientError >> response [
+PlaidResponseError >> response [
 	^ response
 ]

@@ -8,12 +8,9 @@ Class {
 	#category : #'Plaid-Client'
 }
 
-{ #category : #'instance creation' }
-PlaidInstitutionsListEndpoint class >> withClient: aClient [
-	^ (self basicNew initializeWithClient: aClient url: aClient baseUrl / 'institutions' / 'get')
-		withClientId;
-		withSecret;
-		yourself
+{ #category : #accessing }
+PlaidInstitutionsListEndpoint class >> urlOn: aClient [
+	^ (super urlOn: aClient) / 'get'
 ]
 
 { #category : #accessing }
@@ -32,6 +29,14 @@ PlaidInstitutionsListEndpoint >> data [
 		at: 'count' put: (count ifNil: [ 10 ]);
 		at: 'offset' put: (offset ifNil: [ 0 ]);
 		yourself
+]
+
+{ #category : #initialization }
+PlaidInstitutionsListEndpoint >> initializeWithClient: aClient url: aUrl [
+	super initializeWithClient: aClient url: aUrl.
+	self
+		withClientId;
+		withSecret
 ]
 
 { #category : #accessing }
