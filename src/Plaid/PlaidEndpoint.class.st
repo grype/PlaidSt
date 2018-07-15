@@ -4,6 +4,14 @@ Class {
 	#category : #'Plaid-Client'
 }
 
+{ #category : #data }
+PlaidEndpoint >> authenticated [
+	self
+		withClientId;
+		withSecret;
+		withAccessToken
+]
+
 { #category : #'response handling' }
 PlaidEndpoint >> validateHttpResponse: aResponse [
 	| errorResponse |

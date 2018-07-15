@@ -121,6 +121,12 @@ PJItem >> itemIdDescription [
 		yourself
 ]
 
+{ #category : #printing }
+PJItem >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPutAll: (' <{1}>' format: {self itemId greaseString})
+]
+
 { #category : #accessing }
 PJItem >> webhook [
 	^ webhook

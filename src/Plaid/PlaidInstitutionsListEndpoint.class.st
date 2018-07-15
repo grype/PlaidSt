@@ -15,36 +15,33 @@ PlaidInstitutionsListEndpoint class >> urlOn: aClient [
 
 { #category : #accessing }
 PlaidInstitutionsListEndpoint >> count [
-	^ count
+	^ data at: #count
 ]
 
 { #category : #accessing }
 PlaidInstitutionsListEndpoint >> count: anObject [
-	count := anObject
-]
-
-{ #category : #accessing }
-PlaidInstitutionsListEndpoint >> data [
-	^ super data
-		at: 'count' put: (count ifNil: [ 10 ]);
-		at: 'offset' put: (offset ifNil: [ 0 ]);
-		yourself
+	data at: #count put: anObject 
 ]
 
 { #category : #initialization }
-PlaidInstitutionsListEndpoint >> initializeWithClient: aClient url: aUrl [
-	super initializeWithClient: aClient url: aUrl.
+PlaidInstitutionsListEndpoint >> initializeData [
+	super initializeData.
 	self
 		withClientId;
 		withSecret
 ]
 
+{ #category : #api }
+PlaidInstitutionsListEndpoint >> list [
+	^ PJInstitutionsResponse fromJson: self post
+]
+
 { #category : #accessing }
 PlaidInstitutionsListEndpoint >> offset [
-	^ offset
+	^ data at: #offset
 ]
 
 { #category : #accessing }
 PlaidInstitutionsListEndpoint >> offset: anObject [
-	offset := anObject
+	data at: #offset put: anObject 
 ]

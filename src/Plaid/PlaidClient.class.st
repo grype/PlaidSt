@@ -106,31 +106,17 @@ PlaidClient class >> sandboxUrl [
 
 { #category : #endpoints }
 PlaidClient >> accounts [
-	| endpoint |
-	endpoint := (self / 'accounts' / 'get')
-		withClientId;
-		withSecret;
-		withAccessToken;
-		yourself.
-	^ PJAccountsResponse fromJson: endpoint post
+	^ self > PlaidAccountsEndpoint
 ]
 
 { #category : #endpoints }
 PlaidClient >> auth [
-	| endpoint |
-	endpoint := (self / 'auth' / 'get')
-		withClientId;
-		withSecret;
-		withAccessToken;
-		yourself.
-	^ PJAuthResponse fromJson: endpoint post
+	^ self > PlaidAuthEndpoint
 ]
 
 { #category : #endpoints }
 PlaidClient >> categories [
-	| endpoint |
-	endpoint := self / 'categories/get'.
-	^ PJCategoriesResponse fromJson: endpoint post
+	^ self > PlaidCategoriesEndpoint
 ]
 
 { #category : #accessing }
@@ -162,16 +148,6 @@ PlaidClient >> environment [
 	^ map at: self baseUrl
 ]
 
-{ #category : #endpoints }
-PlaidClient >> exchangePublicToken: aPublicToken [
-	| endpoint |
-	endpoint := (self / 'item' / 'public_token' / 'exchange')
-		withClientId;
-		withSecret;
-		at: 'public_token' put: aPublicToken.
-	^ PJItemAccessResponse fromJson: endpoint post
-]
-
 { #category : #private }
 PlaidClient >> initialize [
 	super initialize.
@@ -180,7 +156,7 @@ PlaidClient >> initialize [
 
 { #category : #endpoints }
 PlaidClient >> institutions [
-	^ PlaidInstitutionsEndpoint withClient: self
+	^ self > PlaidInstitutionsEndpoint
 ]
 
 { #category : #testing }
@@ -200,13 +176,7 @@ PlaidClient >> isSandboxEnvironment [
 
 { #category : #endpoints }
 PlaidClient >> item [
-	| endpoint |
-	endpoint := (self / 'item' / 'get')
-		withClientId;
-		withSecret;
-		withAccessToken;
-		yourself.
-	^ PJItemResponse fromJson: endpoint post
+	^ self > PlaidItemEndpoint 
 ]
 
 { #category : #endpoints }

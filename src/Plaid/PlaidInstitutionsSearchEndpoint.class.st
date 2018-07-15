@@ -13,36 +13,43 @@ PlaidInstitutionsSearchEndpoint class >> urlOn: aClient [
 	^ (super urlOn: aClient) / 'search'
 ]
 
-{ #category : #accessing }
-PlaidInstitutionsSearchEndpoint >> data [
-	^ super data
-		at: 'query' put: (query ifNil: [ '' ]);
-		at: 'products' put: (products ifNil: [ nil ] ifNotNil: [ :value | value ifEmpty: [ nil ] ifNotEmpty: [ value ] ]);
-		yourself
-]
-
 { #category : #initialization }
-PlaidInstitutionsSearchEndpoint >> initializeWithClient: aClient url: aUrl [
-	super initializeWithClient: aClient url: aUrl.
+PlaidInstitutionsSearchEndpoint >> initializeData [
+	super initializeData.
 	self withPublicKey
 ]
 
 { #category : #accessing }
 PlaidInstitutionsSearchEndpoint >> products [
-	^ products
+	^ data at: #products
 ]
 
 { #category : #accessing }
 PlaidInstitutionsSearchEndpoint >> products: anObject [
-	products := anObject
+	data at: #products put: anObject
 ]
 
 { #category : #accessing }
 PlaidInstitutionsSearchEndpoint >> query [
-	^ query
+	^ data at: #query
 ]
 
 { #category : #accessing }
 PlaidInstitutionsSearchEndpoint >> query: anObject [
-	query := anObject
+	data at: #query put: anObject
+]
+
+{ #category : #api }
+PlaidInstitutionsSearchEndpoint >> query: aQuery products: aListOfProducts [
+	^ PJInstitutionsResponse
+		fromJson:
+			(self
+				query: aQuery;
+				products: aListOfProducts;
+				post)
+]
+
+{ #category : #api }
+PlaidInstitutionsSearchEndpoint >> search [
+	^ PJInstitutionsResponse fromJson: self post
 ]
