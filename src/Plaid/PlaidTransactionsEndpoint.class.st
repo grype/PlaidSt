@@ -6,11 +6,22 @@ Class {
 
 { #category : #'instance creation' }
 PlaidTransactionsEndpoint class >> urlOn: aClient [
-	^ aClient baseUrl / 'transactions'
+	^ (super urlOn: aClient) / 'transactions'
 ]
 
 { #category : #initialization }
 PlaidTransactionsEndpoint >> initializeData [
 	super initializeData.
 	self authenticated
+]
+
+{ #category : #endpoints }
+PlaidTransactionsEndpoint >> list [
+	^ self > PlaidTransactionsListEndpoint 
+
+]
+
+{ #category : #endpoints }
+PlaidTransactionsEndpoint >> list: aBlock [
+	^ (aBlock cull: self list) list
 ]

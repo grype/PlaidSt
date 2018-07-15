@@ -6,7 +6,7 @@ Class {
 
 { #category : #'instance creation' }
 PlaidPublicTokenEndpoint class >> urlOn: aClient [
-	^ aClient baseUrl / 'public_token'
+	^ (super urlOn: aClient) / 'public_token'
 ]
 
 { #category : #api }

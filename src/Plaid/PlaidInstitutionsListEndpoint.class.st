@@ -15,12 +15,20 @@ PlaidInstitutionsListEndpoint class >> urlOn: aClient [
 
 { #category : #accessing }
 PlaidInstitutionsListEndpoint >> count [
-	^ data at: #count
+	^ count
 ]
 
 { #category : #accessing }
 PlaidInstitutionsListEndpoint >> count: anObject [
-	data at: #count put: anObject 
+	count := anObject
+]
+
+{ #category : #accessing }
+PlaidInstitutionsListEndpoint >> data [
+	^ super data copy
+		at: #count put: self count;
+		at: #offset put: self offset;
+		yourself
 ]
 
 { #category : #initialization }
@@ -31,17 +39,17 @@ PlaidInstitutionsListEndpoint >> initializeData [
 		withSecret
 ]
 
-{ #category : #api }
+{ #category : #endpoints }
 PlaidInstitutionsListEndpoint >> list [
 	^ PJInstitutionsResponse fromJson: self post
 ]
 
 { #category : #accessing }
 PlaidInstitutionsListEndpoint >> offset [
-	^ data at: #offset
+	^ offset
 ]
 
 { #category : #accessing }
 PlaidInstitutionsListEndpoint >> offset: anObject [
-	data at: #offset put: anObject 
+	offset := anObject
 ]

@@ -6,7 +6,7 @@ Class {
 
 { #category : #'instance creation' }
 PlaidCategoriesEndpoint class >> urlOn: aClient [
-	^ aClient baseUrl / 'categories'
+	^ (super urlOn: aClient) / 'categories'
 ]
 
 { #category : #api }

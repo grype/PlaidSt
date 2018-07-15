@@ -16,7 +16,8 @@ PlaidInstitutionsSearchEndpoint class >> urlOn: aClient [
 { #category : #initialization }
 PlaidInstitutionsSearchEndpoint >> initializeData [
 	super initializeData.
-	self withPublicKey
+	self withPublicKey.
+	self products: [  ]
 ]
 
 { #category : #accessing }

@@ -14,7 +14,17 @@ PlaidInstitutionsEndpoint >> list [
 	^ self > PlaidInstitutionsListEndpoint
 ]
 
+{ #category : #api }
+PlaidInstitutionsEndpoint >> list: aBlock [
+	^ (aBlock cull: self list) list
+]
+
 { #category : #endpoints }
 PlaidInstitutionsEndpoint >> search [
 	^ self > PlaidInstitutionsSearchEndpoint
+]
+
+{ #category : #endpoints }
+PlaidInstitutionsEndpoint >> search: aBlock [
+	^ aBlock cull: self search
 ]

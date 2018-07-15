@@ -180,6 +180,11 @@ PlaidClient >> item [
 ]
 
 { #category : #endpoints }
+PlaidClient >> transactions [
+	^ self > PlaidTransactionsEndpoint  
+]
+
+{ #category : #endpoints }
 PlaidClient >> transactionsFrom: startDate to: endDate accountIds: aListOfAccountIds count: aCount offset: anOffset [
 	| options |
 	options := Dictionary new.
