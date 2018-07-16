@@ -299,14 +299,15 @@ PJTransaction >> printName [
 { #category : #printing }
 PJTransaction >> printOn: aStream [
 	aStream
-		nextPutAll: self printName greaseString;
-		nextPutAll: ' ($';
-		nextPutAll: self amount greaseString;
-		nextPut: Character space;
-		nextPutAll: self printCurrencyCode greaseString;
-		nextPutAll: ')'.
-	
-	self hasLocation ifTrue: [ aStream nextPutAll: ' <*>' ]
+		nextPutAll:
+			('${1} - {2} - {3}'
+				format:
+					{self amount greaseString.
+					self printName greaseString.
+					self date yyyymmdd greaseString}).
+
+	self hasLocation
+		ifTrue: [ aStream nextPutAll: ' <*>' ]
 ]
 
 { #category : #accessing }
