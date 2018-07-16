@@ -23,3 +23,8 @@ PlaidItemEndpoint >> publicToken [
 PlaidItemEndpoint >> remove [
 	^ PJItemRemovedResponse fromJson: (self / 'remove') authenticated post
 ]
+
+{ #category : #endpoints }
+PlaidItemEndpoint >> webhook [
+	^ self > PlaidItemWebhookEndpoint 
+]
