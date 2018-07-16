@@ -20,7 +20,9 @@ PJObject >> = another [
 
 { #category : #descriptions }
 PJObject >> magritteDescription [
-	^ super magritteDescription
-		jsonWriter: PJJsonWriter;
-		yourself
+	| description |
+	description := super magritteDescription.
+	description jsonWriter: PJJsonWriter.
+	description children do: [ :each | each jsonWriter: PJJsonWriter; jsonReader: PJJsonReader ].
+	^ description
 ]
