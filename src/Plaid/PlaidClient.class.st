@@ -44,6 +44,11 @@ Class {
 	#category : #'Plaid-Client'
 }
 
+{ #category : #accessing }
+PlaidClient class >> apiVersion [
+	^ '2018-05-22'
+]
+
 { #category : #'instance creation' }
 PlaidClient class >> development [
 	^ self withUrl: DevelopmentUrl
@@ -129,6 +134,13 @@ PlaidClient >> clientName: anObject [
 	clientName := anObject
 ]
 
+{ #category : #http }
+PlaidClient >> configureHttpClient: http [
+	super configureHttpClient: http.
+	http
+		headerAt: 'Plaid-Version' put: self class apiVersion
+]
+
 { #category : #accessing }
 PlaidClient >> credentials [
 	^ credentials
@@ -206,4 +218,16 @@ PlaidClient >> transactionsFrom: startDate to: endDate options: options [
 		yourself.
 	options ifNotNil: [ :value | endpoint at: 'options' put: value ].
 	^ PJTransactionsResponse fromJson: endpoint post
+]
+
+{ #category : #execution }
+PlaidClient >> validateResponse: aResponse [
+	| error |
+
+	aResponse isSuccess
+		ifTrue: [ ^ self ].
+	error := PJError fromJson: aResponse contents.
+	PlaidResponseError
+		withResponse: error;
+		signal: error displayMessage
 ]

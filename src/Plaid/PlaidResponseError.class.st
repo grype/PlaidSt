@@ -16,7 +16,7 @@ PlaidResponseError class >> withResponse: aResponse [
 PlaidResponseError >> initializeWithResponse: aResponse [
 	self initialize.
 	response := aResponse.
-	messageText := response displayMessage ifNil: [ response errorMessage ]
+	messageText := response displayMessage ifNil: [ response message ]
 ]
 
 { #category : #accessing }

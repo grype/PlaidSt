@@ -1,15 +1,17 @@
 Class {
 	#name : #PlaidCategoriesEndpoint,
-	#superclass : #PlaidEndpoint,
+	#superclass : #PlaidAuthenticatedEndpoint,
 	#category : #'Plaid-Client'
 }
 
-{ #category : #'instance creation' }
-PlaidCategoriesEndpoint class >> urlOn: aClient [
-	^ (super urlOn: aClient) / 'categories'
+{ #category : #accessing }
+PlaidCategoriesEndpoint >> endpointPath [
+	^ Path / 'categories'
 ]
 
 { #category : #api }
 PlaidCategoriesEndpoint >> list [
-	^ PJCategoriesResponse fromJson: (self / 'get') post
+	<endpoint: 'get'>
+	<post>
+	^ PJCategoriesResponse fromJson: self execute
 ]

@@ -5,26 +5,26 @@ Class {
 }
 
 { #category : #accessing }
-PlaidInstitutionsEndpoint class >> urlOn: aClient [
-	^ (super urlOn: aClient) / 'institutions'
+PlaidInstitutionsEndpoint >> endpointPath [
+	^ Path / 'institutions'
 ]
 
 { #category : #endpoints }
-PlaidInstitutionsEndpoint >> list [
-	^ self > PlaidInstitutionsListEndpoint
+PlaidInstitutionsEndpoint >> listFrom: anOffset count: aCount [
+	<endpoint: 'get'>
+	<post>
+	self withClientId ; withSecret .
+	self dataAt: #offset put: anOffset; dataAt: #count put: aCount.
+	^ PJInstitutionsResponse fromJson: self execute
 ]
 
 { #category : #api }
-PlaidInstitutionsEndpoint >> list: aBlock [
-	^ (aBlock cull: self list) list
-]
-
-{ #category : #endpoints }
-PlaidInstitutionsEndpoint >> search [
-	^ self > PlaidInstitutionsSearchEndpoint
-]
-
-{ #category : #endpoints }
-PlaidInstitutionsEndpoint >> search: aBlock [
-	^ aBlock cull: self search
+PlaidInstitutionsEndpoint >> search: aQueryString products: aProductCollection [
+	<endpoint: 'search'>
+	<post>
+	self withPublicKey.
+	self
+		dataAt: #query put: aQueryString;
+		dataAt: #products put: aProductCollection.
+	^ PJInstitutionsResponse fromJson: self execute
 ]

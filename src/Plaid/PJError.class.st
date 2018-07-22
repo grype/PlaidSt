@@ -33,7 +33,7 @@ PJError >> codeDescription [
 
 { #category : #accessing }
 PJError >> displayMessage [
-	^ displayMessage
+	^ displayMessage ifNil: [ message ]
 ]
 
 { #category : #accessing }

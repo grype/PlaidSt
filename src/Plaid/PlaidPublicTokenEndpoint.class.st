@@ -1,26 +1,25 @@
 Class {
 	#name : #PlaidPublicTokenEndpoint,
-	#superclass : #PlaidItemEndpoint,
+	#superclass : #PlaidAuthenticatedEndpoint,
 	#category : #'Plaid-Client'
 }
 
-{ #category : #'instance creation' }
-PlaidPublicTokenEndpoint class >> urlOn: aClient [
-	^ (super urlOn: aClient) / 'public_token'
-]
-
 { #category : #api }
 PlaidPublicTokenEndpoint >> create [
-	^ PJItemAccessResponse fromJson: (self / 'create') authenticated post
+	<endpoint: 'create'>
+	<post>
+	^ PJItemAccessResponse fromJson: self execute
+]
+
+{ #category : #accessing }
+PlaidPublicTokenEndpoint >> endpointPath [
+	^ Path / 'item' / 'public_token'
 ]
 
 { #category : #api }
 PlaidPublicTokenEndpoint >> exhange: aPublicToken [
-	^ PJItemAccessResponse
-		fromJson:
-			((self / 'exchange')
-				withClientId;
-				withSecret;
-				at: 'public_token' put: aPublicToken;
-				post)
+	<endpoint: 'exchange'>
+	<post>
+	self dataAt: 'public_token' put: aPublicToken.
+	^ PJItemAccessResponse fromJson: self execute
 ]

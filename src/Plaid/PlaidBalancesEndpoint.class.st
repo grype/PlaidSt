@@ -1,6 +1,6 @@
 Class {
 	#name : #PlaidBalancesEndpoint,
-	#superclass : #PlaidAccountsEndpoint,
+	#superclass : #PlaidAuthenticatedEndpoint,
 	#instVars : [
 		'accountIds'
 	],
@@ -8,15 +8,13 @@ Class {
 }
 
 { #category : #accessing }
-PlaidBalancesEndpoint class >> urlOn: aClient [
-	^ (super urlOn: aClient) / 'balance'
+PlaidBalancesEndpoint >> endpointPath [
+	^ Path / 'accounts' / 'balance'
 ]
 
 { #category : #api }
 PlaidBalancesEndpoint >> list [
-	| endpoint |
-
-	endpoint := (self / 'get') authenticated.
-	accountIds isEmptyOrNil ifFalse: [ endpoint at: 'account_ids' put: accountIds ].
-	^ PJAccountsResponse fromJson: endpoint post
+	<endpoint: 'get'>
+	<post>
+	^ PJAccountsResponse fromJson: self execute
 ]

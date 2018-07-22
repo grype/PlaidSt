@@ -1,17 +1,19 @@
 Class {
 	#name : #PlaidItemEndpoint,
-	#superclass : #PlaidEndpoint,
+	#superclass : #PlaidAuthenticatedEndpoint,
 	#category : #'Plaid-Client'
 }
 
-{ #category : #'instance creation' }
-PlaidItemEndpoint class >> urlOn: aClient [
-	^ (super urlOn: aClient) / 'item'
+{ #category : #accessing }
+PlaidItemEndpoint >> endpointPath [
+	^ Path / 'item'
 ]
 
 { #category : #api }
 PlaidItemEndpoint >> list [
-	^ PJItemResponse fromJson: (self / 'get') authenticated post
+	<endpoint: 'get'>
+	<post>
+	^ PJItemResponse fromJson: self execute
 ]
 
 { #category : #endpoints }
@@ -21,7 +23,9 @@ PlaidItemEndpoint >> publicToken [
 
 { #category : #api }
 PlaidItemEndpoint >> remove [
-	^ PJItemRemovedResponse fromJson: (self / 'remove') authenticated post
+	<endpoint: 'remove'>
+	<post>
+	^ PJItemRemovedResponse fromJson: self execute
 ]
 
 { #category : #endpoints }
