@@ -196,30 +196,6 @@ PlaidClient >> transactions [
 	^ self > PlaidTransactionsEndpoint  
 ]
 
-{ #category : #endpoints }
-PlaidClient >> transactionsFrom: startDate to: endDate accountIds: aListOfAccountIds count: aCount offset: anOffset [
-	| options |
-	options := Dictionary new.
-	aListOfAccountIds ifNotNil: [ :value | options at: 'account_ids' put: value ].
-	aCount ifNotNil: [ :value | options at: 'count' put: value ].
-	anOffset ifNotNil: [ :value | options at: 'offset' put: value ].
-	^ self transactionsFrom: startDate to: endDate options: options
-]
-
-{ #category : #endpoints }
-PlaidClient >> transactionsFrom: startDate to: endDate options: options [
-	| endpoint |
-	endpoint := (self / 'transactions' / 'get')
-		withClientId;
-		withSecret;
-		withAccessToken;
-		at: 'start_date' put: startDate asPlaidString;
-		at: 'end_date' put: endDate asPlaidString;
-		yourself.
-	options ifNotNil: [ :value | endpoint at: 'options' put: value ].
-	^ PJTransactionsResponse fromJson: endpoint post
-]
-
 { #category : #execution }
 PlaidClient >> validateResponse: aResponse [
 	| error |
