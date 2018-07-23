@@ -16,7 +16,7 @@ PlaidAccountsEndpoint >> balance [
 
 { #category : #api }
 PlaidAccountsEndpoint >> list [
-	<endpoint: '/accounts/get'>
+	<endpoint: 'get'>
 	<post>
 	^ PJAccountsResponse fromJson: self execute
 ]

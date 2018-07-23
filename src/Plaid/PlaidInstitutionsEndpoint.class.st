@@ -13,8 +13,12 @@ PlaidInstitutionsEndpoint class >> endpointPath [
 PlaidInstitutionsEndpoint >> listFrom: anOffset count: aCount [
 	<endpoint: 'get'>
 	<post>
-	self withClientId ; withSecret .
-	self dataAt: #offset put: anOffset; dataAt: #count put: aCount.
+	self
+		withClientId;
+		withSecret.
+	self
+		dataAt: #offset put: anOffset;
+		dataAt: #count put: aCount.
 	^ PJInstitutionsResponse fromJson: self execute
 ]
 
