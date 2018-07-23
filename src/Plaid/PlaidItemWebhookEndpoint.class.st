@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-PlaidItemWebhookEndpoint >> endpointPath [
+PlaidItemWebhookEndpoint class >> endpointPath [
 	^ Path / 'item' / 'webhook'
 ]
 

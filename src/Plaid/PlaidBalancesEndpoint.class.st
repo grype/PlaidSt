@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #accessing }
-PlaidBalancesEndpoint >> endpointPath [
+PlaidBalancesEndpoint class >> endpointPath [
 	^ Path / 'accounts' / 'balance'
 ]
 

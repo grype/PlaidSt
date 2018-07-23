@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-PlaidCategoriesEndpoint >> endpointPath [
+PlaidCategoriesEndpoint class >> endpointPath [
 	^ Path / 'categories'
 ]
 

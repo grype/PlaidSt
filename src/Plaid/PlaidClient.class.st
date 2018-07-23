@@ -64,11 +64,6 @@ PlaidClient class >> developmentUrl [
 	^ DevelopmentUrl
 ]
 
-{ #category : #defaults }
-PlaidClient class >> endpointClass [
-	^ PlaidEndpoint
-]
-
 { #category : #initialize }
 PlaidClient class >> initialize [
 	SandboxEnvironment := 'sandbox'.

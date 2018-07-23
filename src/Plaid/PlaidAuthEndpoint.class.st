@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-PlaidAuthEndpoint >> endpointPath [
+PlaidAuthEndpoint class >> endpointPath [
 	^ Path / 'auth'
 ]
 

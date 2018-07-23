@@ -4,14 +4,14 @@ Class {
 	#category : #'Plaid-Client'
 }
 
+{ #category : #accessing }
+PlaidAccountsEndpoint class >> endpointPath [
+	^ Path / 'accounts'
+]
+
 { #category : #endpoints }
 PlaidAccountsEndpoint >> balance [
 	^ self > PlaidBalancesEndpoint
-]
-
-{ #category : #accessing }
-PlaidAccountsEndpoint >> endpointPath [
-	^ '/accounts'
 ]
 
 { #category : #api }

@@ -4,16 +4,16 @@ Class {
 	#category : #'Plaid-Client'
 }
 
+{ #category : #accessing }
+PlaidPublicTokenEndpoint class >> endpointPath [
+	^ Path / 'item' / 'public_token'
+]
+
 { #category : #api }
 PlaidPublicTokenEndpoint >> create [
 	<endpoint: 'create'>
 	<post>
 	^ PJItemAccessResponse fromJson: self execute
-]
-
-{ #category : #accessing }
-PlaidPublicTokenEndpoint >> endpointPath [
-	^ Path / 'item' / 'public_token'
 ]
 
 { #category : #api }

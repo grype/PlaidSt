@@ -11,6 +11,11 @@ Class {
 	#category : #'Plaid-Client'
 }
 
+{ #category : #accessing }
+PlaidTransactionsEndpoint class >> endpointPath [
+	^ Path / 'transactions'
+]
+
 { #category : #'instance creation' }
 PlaidTransactionsEndpoint class >> urlOn: aClient [
 	^ (super urlOn: aClient) / 'get'
@@ -57,11 +62,6 @@ PlaidTransactionsEndpoint >> endDate [
 { #category : #accessing }
 PlaidTransactionsEndpoint >> endDate: anObject [
 	endDate := anObject
-]
-
-{ #category : #accessing }
-PlaidTransactionsEndpoint >> endpointPath [
-	^ Path / 'transactions'
 ]
 
 { #category : #accessing }
