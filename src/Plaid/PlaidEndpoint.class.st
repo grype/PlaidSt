@@ -79,3 +79,18 @@ PlaidEndpoint >> withPublicKey [
 PlaidEndpoint >> withSecret [
 	self client credentials secret ifNotNil: [ :value | self dataAt: 'secret' put: value ]
 ]
+
+{ #category : #data }
+PlaidEndpoint >> withoutAccessToken [
+	self dataRemoveAt: 'access_token'
+]
+
+{ #category : #data }
+PlaidEndpoint >> withoutPublicKey [
+	self dataRemoveAt: 'public_key'
+]
+
+{ #category : #data }
+PlaidEndpoint >> withoutSecret [
+	self dataRemoveAt: 'secret'
+]
