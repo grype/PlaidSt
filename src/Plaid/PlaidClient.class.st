@@ -155,6 +155,11 @@ PlaidClient >> environment [
 	^ map at: self baseUrl
 ]
 
+{ #category : #endpoints }
+PlaidClient >> identity [
+	^ self > PlaidIdentityEndpoint   
+]
+
 { #category : #private }
 PlaidClient >> initialize [
 	super initialize.
