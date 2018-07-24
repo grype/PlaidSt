@@ -17,9 +17,11 @@ PlaidPublicTokenEndpoint >> create [
 ]
 
 { #category : #api }
-PlaidPublicTokenEndpoint >> exhange: aPublicToken [
+PlaidPublicTokenEndpoint >> exchange: aPublicToken [
 	<endpoint: 'exchange'>
 	<post>
-	self dataAt: 'public_token' put: aPublicToken.
+	self
+		withoutAccessToken;
+		dataAt: 'public_token' put: aPublicToken.
 	^ PJItemAccessResponse fromJson: self execute
 ]
