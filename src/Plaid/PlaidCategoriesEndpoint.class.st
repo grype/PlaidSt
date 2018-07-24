@@ -1,6 +1,6 @@
 Class {
 	#name : #PlaidCategoriesEndpoint,
-	#superclass : #PlaidAuthenticatedEndpoint,
+	#superclass : #PlaidEndpoint,
 	#category : #'Plaid-Client'
 }
 
