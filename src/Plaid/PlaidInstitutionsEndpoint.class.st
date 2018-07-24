@@ -10,6 +10,16 @@ PlaidInstitutionsEndpoint class >> endpointPath [
 ]
 
 { #category : #endpoints }
+PlaidInstitutionsEndpoint >> institutionWithId: anInstitutionId [
+	<endpoint: 'get_by_id'>
+	<post>
+	self
+		withPublicKey;
+		dataAt: #institution_id put: anInstitutionId.
+	^ PJInstitutionResponse fromJson: self execute
+]
+
+{ #category : #endpoints }
 PlaidInstitutionsEndpoint >> listFrom: anOffset count: aCount [
 	<endpoint: 'get'>
 	<post>
