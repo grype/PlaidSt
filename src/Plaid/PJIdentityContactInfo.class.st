@@ -49,6 +49,17 @@ PJIdentityContactInfo >> primaryDescription [
 		yourself
 ]
 
+{ #category : #printing }
+PJIdentityContactInfo >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' <';
+		nextPutAll: data greaseString;
+		nextPutAll: '>'
+]
+
 { #category : #accessing }
 PJIdentityContactInfo >> type [
 	^ type

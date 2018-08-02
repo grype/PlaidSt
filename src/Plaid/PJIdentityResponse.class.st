@@ -27,6 +27,7 @@ PJIdentityResponse >> accountsDescription [
 		accessor: #accounts;
 		jsonName: #accounts;
 		classes: { PJAccount };
+		beOrdered;
 		beOptional;
 		yourself
 ]

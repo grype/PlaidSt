@@ -28,6 +28,7 @@ PJIdentity >> addressesDescription [
 		accessor: #addresses;
 		jsonName: #addresses;
 		classes: { PJIdentityAddress };
+		beOrdered;
 		beOptional;
 		yourself
 ]
@@ -50,8 +51,19 @@ PJIdentity >> emailsDescription [
 		accessor: #emails;
 		jsonName: #emails;
 		classes: { PJIdentityContactInfo };
+		beOrdered;
 		beOptional;
 		yourself
+]
+
+{ #category : #accessing }
+PJIdentity >> names [
+	^ names
+]
+
+{ #category : #accessing }
+PJIdentity >> names: anObject [
+	names := anObject
 ]
 
 { #category : #description }
@@ -65,6 +77,16 @@ PJIdentity >> namesDescription [
 		yourself
 ]
 
+{ #category : #accessing }
+PJIdentity >> phoneNumbers [
+	^ phoneNumbers
+]
+
+{ #category : #accessing }
+PJIdentity >> phoneNumbers: anObject [
+	phoneNumbers := anObject
+]
+
 { #category : #description }
 PJIdentity >> phoneNumbersDescription [
 	<magritteDescription>
@@ -73,6 +95,17 @@ PJIdentity >> phoneNumbersDescription [
 		accessor: #phoneNumbers;
 		jsonName: #phone_numbers;
 		classes: { PJIdentityContactInfo };
+		beOrdered;
 		beOptional;
 		yourself
+]
+
+{ #category : #printing }
+PJIdentity >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' names: ';
+		print: (names joinUsing: ' ')
 ]

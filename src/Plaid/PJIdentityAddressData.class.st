@@ -30,6 +30,18 @@ PJIdentityAddressData >> cityDescription [
 		yourself
 ]
 
+{ #category : #printing }
+PJIdentityAddressData >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	| parts |
+	super printOn: aStream.
+	aStream nextPut: Character space.
+	parts := { street. city. state. zip }.
+	aStream
+		nextPutAll: (parts joinUsing: ', ')
+]
+
 { #category : #accessing }
 PJIdentityAddressData >> state [
 	^ state
