@@ -160,6 +160,11 @@ PlaidClient >> identity [
 	^ self > PlaidIdentityEndpoint   
 ]
 
+{ #category : #endpoints }
+PlaidClient >> income [
+	^ self > PlaidIncomeEndpoint 
+]
+
 { #category : #private }
 PlaidClient >> initialize [
 	super initialize.
