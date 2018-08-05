@@ -92,6 +92,11 @@ PJAssetReport >> daysRequestedDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJAssetReport >> hash [
+	^ assetReportId hash
+]
+
 { #category : #accessing }
 PJAssetReport >> items [
 	^ items

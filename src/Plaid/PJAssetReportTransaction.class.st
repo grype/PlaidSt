@@ -74,6 +74,11 @@ PJAssetReportTransaction >> dateDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJAssetReportTransaction >> hash [
+	^ transactionId hash
+]
+
 { #category : #accessing }
 PJAssetReportTransaction >> isoCurrencyCode [
 	^ isoCurrencyCode

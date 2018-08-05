@@ -52,6 +52,11 @@ PJError >> displayMessageDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJError >> hash [
+	^ type hash + code hash
+]
+
 { #category : #accessing }
 PJError >> message [
 	^ message

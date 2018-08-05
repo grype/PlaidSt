@@ -39,6 +39,11 @@ PJWarning >> codeDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJWarning >> hash [
+	^ type hash + code hash
+]
+
 { #category : #testing }
 PJWarning >> isOwnersUnavailable [
 	^ code asUppercase = 'OWNERS_UNAVAILABLE'

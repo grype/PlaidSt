@@ -73,6 +73,11 @@ PJAssetReportUser >> firstNameDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJAssetReportUser >> hash [
+	^ clientUserId hash
+]
+
 { #category : #accessing }
 PJAssetReportUser >> lastName [
 	^ lastName

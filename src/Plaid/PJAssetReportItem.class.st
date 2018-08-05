@@ -54,6 +54,11 @@ PJAssetReportItem >> dateLastUpdatedDescription [
 		yourself
 ]
 
+{ #category : #comparing }
+PJAssetReportItem >> hash [
+	^ itemId hash
+]
+
 { #category : #accessing }
 PJAssetReportItem >> institutionId [
 	^ institutionId
