@@ -25,29 +25,54 @@ PJPropertyBuilder class >> on: aContext [
 	^ self basicNew initializeWithContext: aContext
 ]
 
-{ #category : #building }
+{ #category : #'private-building' }
 PJPropertyBuilder >> at: aKey put: aValue [
 	dictionary at: aKey put: aValue
 ]
 
-{ #category : #building }
+{ #category : #'private-building' }
 PJPropertyBuilder >> at: aKey putAjaxCallback: aCallback [
 	dictionary at: aKey put: (self valueForAjaxCallback: aCallback)
 ]
 
-{ #category : #building }
+{ #category : #'private-building' }
 PJPropertyBuilder >> at: aKey putCallback: aCallback [
 	dictionary at: aKey put: (self valueForCallback: aCallback)
 ]
 
-{ #category : #building }
+{ #category : #'private-building' }
 PJPropertyBuilder >> at: aKey putCollection: aCollectionOrValue [
 	dictionary at: aKey put: aCollectionOrValue asOrderedCollection
+]
+
+{ #category : #building }
+PJPropertyBuilder >> beDevelopmentEnvironment [
+	self env: #development
+]
+
+{ #category : #building }
+PJPropertyBuilder >> beProductionEnvironment [
+	self env: #production
+]
+
+{ #category : #building }
+PJPropertyBuilder >> beSandboxEnvironment [
+	self env: #sandbox
+]
+
+{ #category : #building }
+PJPropertyBuilder >> clientName: aString [
+	self at: #clientName put: aString
 ]
 
 { #category : #accessing }
 PJPropertyBuilder >> data [
 	^ dictionary 
+]
+
+{ #category : #building }
+PJPropertyBuilder >> env: aString [
+	self at: #env put: aString
 ]
 
 { #category : #initialize }
@@ -60,6 +85,46 @@ PJPropertyBuilder >> initialize [
 PJPropertyBuilder >> initializeWithContext: aContext [
 	self initialize.
 	context := aContext 
+]
+
+{ #category : #building }
+PJPropertyBuilder >> isWebview: aBool [
+	self at: #isWebview put: aBool
+]
+
+{ #category : #building }
+PJPropertyBuilder >> key: aString [
+	self at: #key put: aString
+]
+
+{ #category : #building }
+PJPropertyBuilder >> onEvent: aCallback [
+	self at: #onEvent putAjaxCallback: aCallback
+]
+
+{ #category : #building }
+PJPropertyBuilder >> onExit: aCallback [
+	self at: #onExit putAjaxCallback: aCallback
+]
+
+{ #category : #building }
+PJPropertyBuilder >> onLoad: aCallback [
+	self at: #onLoad putAjaxCallback: aCallback
+]
+
+{ #category : #building }
+PJPropertyBuilder >> onSuccess: aCallback [
+	self at: #onSuccess putAjaxCallback: aCallback
+]
+
+{ #category : #building }
+PJPropertyBuilder >> product: aCollectionOfStrings [
+	self at: #product putCollection: aCollectionOfStrings
+]
+
+{ #category : #building }
+PJPropertyBuilder >> token: aString [
+	self at: #token put: aString
 ]
 
 { #category : #'private-building' }
@@ -83,4 +148,9 @@ PJPropertyBuilder >> valueForAjaxCallbackOld: aBlock [
 { #category : #'private-building' }
 PJPropertyBuilder >> valueForCallback: aBlock [
 	^ (JSFunction context: context) callback: aBlock
+]
+
+{ #category : #building }
+PJPropertyBuilder >> webhook: aUrlOrString [
+	self at: #webhook put: aUrlOrString greaseString
 ]

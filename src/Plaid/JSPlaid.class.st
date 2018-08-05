@@ -28,11 +28,12 @@ Class {
 { #category : #'private-source' }
 JSPlaid >> create: aPlaidClient with: aBuilderBlock [
 	| builder |
+
 	builder := PJPropertyBuilder on: self renderContext.
 	builder
-		at: 'clientName' put: aPlaidClient clientName;
-		at: 'env' put: aPlaidClient environment;
-		at: 'key' put: aPlaidClient credentials publicKey.
+		clientName: aPlaidClient clientName;
+		env: aPlaidClient environment;
+		key: aPlaidClient credentials publicKey.
 	aBuilderBlock ifNotNil: [ :block | block cull: builder ].
 	self call: 'create' with: builder data
 ]
