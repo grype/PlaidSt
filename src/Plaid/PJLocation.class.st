@@ -119,11 +119,14 @@ PJLocation >> printAddress [
 
 { #category : #printing }
 PJLocation >> printOn: aStream [
+	super printOn: aStream.
+	aStream nextPutAll: ' <'.
 	self printAddress
 		ifEmpty: [ self hasGeolocation
 				ifTrue: [ aStream nextPutAll: 'Geolocation' ]
 				ifFalse: [ aStream nextPutAll: 'Invalid Location' ] ]
-		ifNotEmpty: [ :value | aStream nextPutAll: value ]
+		ifNotEmpty: [ :value | aStream nextPutAll: value ].
+	aStream nextPut: $>
 ]
 
 { #category : #accessing }

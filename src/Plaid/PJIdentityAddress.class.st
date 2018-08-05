@@ -83,5 +83,8 @@ PJIdentityAddress >> printOn: aStream [
 	addressData city.
 	addressData state.
 	addressData zip}.
-	aStream print: (parts joinUsing: ', ')
+	aStream
+		nextPutAll: ' <';
+		nextPutAll: (parts joinUsing: ', ');
+		nextPut: $>
 ]

@@ -106,6 +106,7 @@ PJIdentity >> printOn: aStream [
 
 	super printOn: aStream.
 	aStream
-		nextPutAll: ' names: ';
-		print: (names joinUsing: ' ')
+		nextPutAll: ' <';
+		nextPutAll: (names joinUsing: ' ');
+		nextPut: $>
 ]

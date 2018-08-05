@@ -298,16 +298,17 @@ PJTransaction >> printName [
 
 { #category : #printing }
 PJTransaction >> printOn: aStream [
+	super printOn: aStream.
 	aStream
 		nextPutAll:
-			('${1} - {2} - {3}'
+			(' <${1} - {2} - {3}>'
 				format:
 					{self amount greaseString.
 					self printName greaseString.
 					self date yyyymmdd greaseString}).
 
 	self hasLocation
-		ifTrue: [ aStream nextPutAll: ' <*>' ]
+		ifTrue: [ aStream nextPutAll: ' [L]' ]
 ]
 
 { #category : #accessing }

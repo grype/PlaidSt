@@ -110,6 +110,11 @@ PlaidClient >> accounts [
 ]
 
 { #category : #endpoints }
+PlaidClient >> assetReport [
+	^ self > PlaidAssetReportEndpoint   
+]
+
+{ #category : #endpoints }
 PlaidClient >> auth [
 	^ self > PlaidAuthEndpoint
 ]

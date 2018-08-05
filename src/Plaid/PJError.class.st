@@ -73,6 +73,17 @@ PJError >> messageDescription [
 		yourself
 ]
 
+{ #category : #printing }
+PJError >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' <';
+		print: message;
+		nextPut: $>
+]
+
 { #category : #accessing }
 PJError >> type [
 	^ type

@@ -124,7 +124,10 @@ PJItem >> itemIdDescription [
 { #category : #printing }
 PJItem >> printOn: aStream [
 	super printOn: aStream.
-	aStream nextPutAll: (' <{1}>' format: {self itemId greaseString})
+	aStream
+		nextPutAll: ' <';
+		nextPutAll: itemId;
+		nextPut: $>
 ]
 
 { #category : #accessing }

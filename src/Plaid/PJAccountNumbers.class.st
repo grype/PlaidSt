@@ -57,10 +57,13 @@ PJAccountNumbers >> hash [
 
 { #category : #printing }
 PJAccountNumbers >> printOn: aStream [
+	super printOn: aStream.
 	aStream
+		nextPutAll: ' <';
 		nextPutAll: self routingNumber greaseString;
-		nextPutAll: ' ';
-		nextPutAll: self accountNumber greaseString
+		nextPutAll: ', ';
+		nextPutAll: self accountNumber greaseString;
+		nextPut: $>
 ]
 
 { #category : #accessing }

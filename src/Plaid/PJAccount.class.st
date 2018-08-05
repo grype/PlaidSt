@@ -50,7 +50,7 @@ PJAccount >> balancesDescription [
 		label: 'Balances';
 		accessor: #balances;
 		jsonName: #balances;
-		classes: { PJAccountBalances };
+		classes: { PJAccountBalance };
 		beOptional;
 		yourself
 ]
@@ -67,6 +67,36 @@ PJAccount >> balancesPrintString [
 { #category : #comparing }
 PJAccount >> hash [
 	^ accountId hash
+]
+
+{ #category : #testing }
+PJAccount >> isBrokerage [
+	^ self type = 'brokerage'
+]
+
+{ #category : #testing }
+PJAccount >> isCredit [
+	^ self type = 'credit'
+]
+
+{ #category : #testing }
+PJAccount >> isDepository [
+	^ self type = 'depository'
+]
+
+{ #category : #testing }
+PJAccount >> isLoan [
+	^ self type = 'loan'
+]
+
+{ #category : #testing }
+PJAccount >> isMortgage [
+	^ self type = 'mortgage'
+]
+
+{ #category : #testing }
+PJAccount >> isOther [
+	^ self type = 'other'
 ]
 
 { #category : #accessing }
@@ -138,13 +168,13 @@ PJAccount >> printName [
 
 { #category : #printing }
 PJAccount >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	super printOn: aStream.
 	aStream
-		nextPutAll: self printName;
-		nextPutAll: ' ...';
-		nextPutAll: self mask;
-		nextPutAll: ' (';
-		nextPutAll: self balancesPrintString;
-		nextPutAll: ')'
+		nextPutAll: ' <';
+		nextPutAll: name;
+		nextPut: $>
 ]
 
 { #category : #accessing }

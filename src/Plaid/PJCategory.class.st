@@ -81,5 +81,9 @@ PJCategory >> printName [
 
 { #category : #printing }
 PJCategory >> printOn: aStream [
-	aStream nextPutAll: self printName 
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' <';
+		nextPutAll: self printName;
+		nextPut: $>
 ]

@@ -1,5 +1,5 @@
 Class {
-	#name : #PJAccountBalances,
+	#name : #PJAccountBalance,
 	#superclass : #PJObject,
 	#instVars : [
 		'available',
@@ -10,17 +10,17 @@ Class {
 }
 
 { #category : #accessing }
-PJAccountBalances >> available [
+PJAccountBalance >> available [
 	^ available
 ]
 
 { #category : #accessing }
-PJAccountBalances >> available: anObject [
+PJAccountBalance >> available: anObject [
 	available := anObject
 ]
 
 { #category : #description }
-PJAccountBalances >> availableDescription [
+PJAccountBalance >> availableDescription [
 	<magritteDescription>
 	^ MANumberDescription new
 		label: 'Available';
@@ -31,17 +31,17 @@ PJAccountBalances >> availableDescription [
 ]
 
 { #category : #accessing }
-PJAccountBalances >> current [
+PJAccountBalance >> current [
 	^ current
 ]
 
 { #category : #accessing }
-PJAccountBalances >> current: anObject [
+PJAccountBalance >> current: anObject [
 	current := anObject
 ]
 
 { #category : #description }
-PJAccountBalances >> currentDescription [
+PJAccountBalance >> currentDescription [
 	<magritteDescription>
 	^ MANumberDescription new
 		label: 'Current';
@@ -52,17 +52,17 @@ PJAccountBalances >> currentDescription [
 ]
 
 { #category : #accessing }
-PJAccountBalances >> limit [
+PJAccountBalance >> limit [
 	^ limit
 ]
 
 { #category : #accessing }
-PJAccountBalances >> limit: anObject [
+PJAccountBalance >> limit: anObject [
 	limit := anObject
 ]
 
 { #category : #description }
-PJAccountBalances >> limitDescription [
+PJAccountBalance >> limitDescription [
 	<magritteDescription>
 	^ MANumberDescription new
 		label: 'Limit';
@@ -70,4 +70,19 @@ PJAccountBalances >> limitDescription [
 		jsonName: #limit;
 		beOptional;
 		yourself
+]
+
+{ #category : #printing }
+PJAccountBalance >> printOn: aStream [
+	"Append a sequence of characters to aStream that identify the receiver."
+
+	super printOn: aStream.
+	aStream
+		nextPutAll: ' <';
+		print: available;
+		nextPut: $/;
+		print: current;
+		nextPut: $/;
+		print: limit;
+		nextPut: $>
 ]
