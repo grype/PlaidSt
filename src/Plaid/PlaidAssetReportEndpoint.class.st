@@ -26,6 +26,11 @@ PlaidAssetReportEndpoint >> accessTokens: anObject [
 	accessTokens := anObject
 ]
 
+{ #category : #endpoints }
+PlaidAssetReportEndpoint >> auditCopy [
+	^ self > PlaidAuditCopyEndpoint 
+]
+
 { #category : #accessing }
 PlaidAssetReportEndpoint >> clientReportId [
 	^ clientReportId
