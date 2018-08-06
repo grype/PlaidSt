@@ -33,5 +33,5 @@ PlaidAuditCopyEndpoint >> removeAutitCopyWithToken: aToken [
 	<post>
 	data
 		at: #audit_copy_token put: aToken.
-	^ PJAuditCopyRemoveResponse fromJson: self execute
+	^ PJRemovedResponse fromJson: self execute
 ]

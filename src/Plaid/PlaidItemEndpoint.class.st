@@ -32,7 +32,7 @@ PlaidItemEndpoint >> publicToken [
 PlaidItemEndpoint >> remove [
 	<endpoint: 'remove'>
 	<post>
-	^ PJItemRemovedResponse fromJson: self execute
+	^ PJRemovedResponse fromJson: self execute
 ]
 
 { #category : #api }

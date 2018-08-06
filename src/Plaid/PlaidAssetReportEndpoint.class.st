@@ -63,3 +63,11 @@ PlaidAssetReportEndpoint >> optionsData [
 	self user ifNotNil: [ :val | dict at: #user put: val ].
 	^ dict
 ]
+
+{ #category : #api }
+PlaidAssetReportEndpoint >> removeReportWithToken: anAssetReportToken [
+	<endpoint: 'remove'>
+	<post>
+	data at: #asset_report_token put: anAssetReportToken.
+	^ PJRemovedResponse fromJson: self execute
+]

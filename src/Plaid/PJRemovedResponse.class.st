@@ -1,5 +1,5 @@
 Class {
-	#name : #PJAuditCopyRemoveResponse,
+	#name : #PJRemovedResponse,
 	#superclass : #PJResponse,
 	#instVars : [
 		'removed'
@@ -7,18 +7,24 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #initialization }
+PJRemovedResponse >> initialize [
+	super initialize.
+	removed := false
+]
+
 { #category : #accessing }
-PJAuditCopyRemoveResponse >> removed [
+PJRemovedResponse >> removed [
 	^ removed
 ]
 
 { #category : #accessing }
-PJAuditCopyRemoveResponse >> removed: anObject [
+PJRemovedResponse >> removed: anObject [
 	removed := anObject
 ]
 
 { #category : #description }
-PJAuditCopyRemoveResponse >> removedDescription [
+PJRemovedResponse >> removedDescription [
 	<magritteDescription>
 	^ MABooleanDescription new
 		label: 'Removed';
