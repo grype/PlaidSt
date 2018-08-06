@@ -17,7 +17,7 @@ PlaidItemWebhookEndpoint >> update [
 	<endpoint: 'update'>
 	<post>
 	self dataAt: 'webhook' put: self url greaseString.
-	^ PJItemResponse fromJson: self execute
+	^ PlaidItemResponse fromJson: self execute
 ]
 
 { #category : #accessing }

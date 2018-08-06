@@ -1,9 +1,6 @@
 Class {
 	#name : #PlaidBalancesEndpoint,
 	#superclass : #PlaidAuthenticatedEndpoint,
-	#instVars : [
-		'accountIds'
-	],
 	#category : #'Plaid-Client'
 }
 
@@ -16,5 +13,5 @@ PlaidBalancesEndpoint class >> endpointPath [
 PlaidBalancesEndpoint >> list [
 	<endpoint: 'get'>
 	<post>
-	^ PJAccountsResponse fromJson: self execute
+	^ PlaidAccountsResponse fromJson: self execute
 ]

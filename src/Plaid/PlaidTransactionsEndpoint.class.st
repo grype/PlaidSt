@@ -16,11 +16,6 @@ PlaidTransactionsEndpoint class >> endpointPath [
 	^ Path / 'transactions'
 ]
 
-{ #category : #'instance creation' }
-PlaidTransactionsEndpoint class >> urlOn: aClient [
-	^ (super urlOn: aClient) / 'get'
-]
-
 { #category : #accessing }
 PlaidTransactionsEndpoint >> accountIds [
 	^ accountIds
@@ -73,7 +68,7 @@ PlaidTransactionsEndpoint >> hasOptions [
 PlaidTransactionsEndpoint >> list [
 	<endpoint: 'get'>
 	<post>
-	^ PJTransactionsResponse fromJson: self execute
+	^ PlaidTransactionsResponse fromJson: self execute
 ]
 
 { #category : #accessing }

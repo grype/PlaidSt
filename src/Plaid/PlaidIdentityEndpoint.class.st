@@ -13,5 +13,5 @@ PlaidIdentityEndpoint class >> endpointPath [
 PlaidIdentityEndpoint >> list [
 	<endpoint: 'get'>
 	<post>
-	^ PJIdentityResponse fromJson: self execute
+	^ PlaidIdentityResponse fromJson: self execute
 ]

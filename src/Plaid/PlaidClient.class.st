@@ -64,7 +64,7 @@ PlaidClient class >> developmentUrl [
 	^ DevelopmentUrl
 ]
 
-{ #category : #initialize }
+{ #category : #'class initialization' }
 PlaidClient class >> initialize [
 	SandboxEnvironment := 'sandbox'.
 	DevelopmentEnvironment := 'development'.
@@ -170,7 +170,7 @@ PlaidClient >> income [
 	^ self > PlaidIncomeEndpoint 
 ]
 
-{ #category : #private }
+{ #category : #initialization }
 PlaidClient >> initialize [
 	super initialize.
 	self contentWriter: [ :obj | ZnEntity json: obj asJson ]
@@ -206,13 +206,13 @@ PlaidClient >> transactions [
 	^ self > PlaidTransactionsEndpoint  
 ]
 
-{ #category : #execution }
+{ #category : #http }
 PlaidClient >> validateResponse: aResponse [
 	| error |
 
 	aResponse isSuccess
 		ifTrue: [ ^ self ].
-	error := PJError fromJson: aResponse contents.
+	error := PlaidError fromJson: aResponse contents.
 	PlaidResponseError
 		withResponse: error;
 		signal: error displayMessage

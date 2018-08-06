@@ -13,5 +13,5 @@ PlaidCategoriesEndpoint class >> endpointPath [
 PlaidCategoriesEndpoint >> list [
 	<endpoint: 'get'>
 	<post>
-	^ PJCategoriesResponse fromJson: self execute
+	^ PlaidCategoriesResponse fromJson: self execute
 ]

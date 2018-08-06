@@ -35,14 +35,7 @@ PlaidAssetReportEndpoint >> getReportWithToken: aReportToken [
 	<endpoint: 'get'>
 	<post>
 	data at: #asset_report_token put: aReportToken.
-	^ PJAssetResponse fromJson: self execute
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> hasOptions [
-	^ ({self clientReportId.
-	self webhook.
-	self user} reject: #isNil) isNotEmpty
+	^ PlaidAssetResponse fromJson: self execute
 ]
 
 { #category : #initialization }
@@ -53,21 +46,10 @@ PlaidAssetReportEndpoint >> initializeOn: aClient [
 		withSecret
 ]
 
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> optionsData [
-	| dict |
-
-	dict := Dictionary new.
-	self clientReportId ifNotNil: [ :val | dict at: #client_report_id put: val ].
-	self webhook ifNotNil: [ :val | dict at: #webhook put: val ].
-	self user ifNotNil: [ :val | dict at: #user put: val ].
-	^ dict
-]
-
 { #category : #api }
 PlaidAssetReportEndpoint >> removeReportWithToken: anAssetReportToken [
 	<endpoint: 'remove'>
 	<post>
 	data at: #asset_report_token put: anAssetReportToken.
-	^ PJRemovedResponse fromJson: self execute
+	^ PlaidRemovedResponse fromJson: self execute
 ]

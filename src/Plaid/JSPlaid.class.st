@@ -29,7 +29,7 @@ Class {
 JSPlaid >> create: aPlaidClient with: aBuilderBlock [
 	| builder |
 
-	builder := PJPropertyBuilder on: self renderContext.
+	builder := PlaidLinkPropertyBuilder on: self renderContext.
 	builder
 		clientName: aPlaidClient clientName;
 		env: aPlaidClient environment;

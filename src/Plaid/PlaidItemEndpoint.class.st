@@ -13,14 +13,14 @@ PlaidItemEndpoint class >> endpointPath [
 PlaidItemEndpoint >> invalidate [
 	<endpoint: 'access_token/invalidate'>
 	<post>
-	^ PJNewAccessTokenResponse fromJson: self execute
+	^ PlaidNewAccessTokenResponse fromJson: self execute
 ]
 
 { #category : #api }
 PlaidItemEndpoint >> list [
 	<endpoint: 'get'>
 	<post>
-	^ PJItemResponse fromJson: self execute
+	^ PlaidItemResponse fromJson: self execute
 ]
 
 { #category : #endpoints }
@@ -32,7 +32,7 @@ PlaidItemEndpoint >> publicToken [
 PlaidItemEndpoint >> remove [
 	<endpoint: 'remove'>
 	<post>
-	^ PJRemovedResponse fromJson: self execute
+	^ PlaidRemovedResponse fromJson: self execute
 ]
 
 { #category : #api }
@@ -42,7 +42,7 @@ PlaidItemEndpoint >> updateAccessTokenVersion [
 	self
 		withoutAccessToken.
 	self client credentials accessToken ifNotNil: [ :value | self dataAt: 'access_token_v1' put: value ].
-	^ PJItemAccessResponse fromJson: self execute
+	^ PlaidItemAccessResponse fromJson: self execute
 ]
 
 { #category : #endpoints }

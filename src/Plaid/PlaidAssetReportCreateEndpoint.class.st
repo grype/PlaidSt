@@ -60,7 +60,7 @@ PlaidAssetReportCreateEndpoint >> execute [
 		at: #days_requested put: self daysRequested.
 	self hasOptions
 		ifTrue: [ data at: #options put: self optionsData ].
-	^ PJAssetCreatedResponse fromJson: super execute
+	^ PlaidAssetCreatedResponse fromJson: super execute
 ]
 
 { #category : #accessing }

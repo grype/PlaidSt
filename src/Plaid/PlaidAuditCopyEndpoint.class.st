@@ -16,7 +16,7 @@ PlaidAuditCopyEndpoint >> createWithAssetReportToken: anAssetReportToken auditor
 	data
 		at: #asset_report_token put: anAssetReportToken;
 		at: #auditor_id put: anAuditorId.
-	^ PJAuditCopyCreateResponse fromJson: self execute
+	^ PlaidAuditCopyCreateResponse fromJson: self execute
 ]
 
 { #category : #initialization }
@@ -33,5 +33,5 @@ PlaidAuditCopyEndpoint >> removeAutitCopyWithToken: aToken [
 	<post>
 	data
 		at: #audit_copy_token put: aToken.
-	^ PJRemovedResponse fromJson: self execute
+	^ PlaidRemovedResponse fromJson: self execute
 ]

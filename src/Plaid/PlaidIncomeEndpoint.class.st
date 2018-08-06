@@ -13,5 +13,5 @@ PlaidIncomeEndpoint class >> endpointPath [
 PlaidIncomeEndpoint >> list [
 	<endpoint: 'get'>
 	<post>
-	^ PJIncomeResponse fromJson: self execute
+	^ PlaidIncomeResponse fromJson: self execute
 ]

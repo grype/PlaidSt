@@ -13,5 +13,5 @@ PlaidAuthEndpoint class >> endpointPath [
 PlaidAuthEndpoint >> list [
 	<endpoint: 'get'>
 	<post>
-	^ PJAuthResponse fromJson: self execute 
+	^ PlaidAuthResponse fromJson: self execute 
 ]

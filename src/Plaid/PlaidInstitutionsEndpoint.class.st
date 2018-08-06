@@ -16,7 +16,7 @@ PlaidInstitutionsEndpoint >> institutionWithId: anInstitutionId [
 	self
 		withPublicKey;
 		dataAt: #institution_id put: anInstitutionId.
-	^ PJInstitutionResponse fromJson: self execute
+	^ PlaidInstitutionResponse fromJson: self execute
 ]
 
 { #category : #api }
@@ -29,7 +29,7 @@ PlaidInstitutionsEndpoint >> listFrom: anOffset count: aCount [
 	self
 		dataAt: #offset put: anOffset;
 		dataAt: #count put: aCount.
-	^ PJInstitutionsResponse fromJson: self execute
+	^ PlaidInstitutionsResponse fromJson: self execute
 ]
 
 { #category : #api }
@@ -40,5 +40,5 @@ PlaidInstitutionsEndpoint >> search: aQueryString products: aProductCollection [
 	self
 		dataAt: #query put: aQueryString;
 		dataAt: #products put: aProductCollection.
-	^ PJInstitutionsResponse fromJson: self execute
+	^ PlaidInstitutionsResponse fromJson: self execute
 ]
