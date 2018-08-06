@@ -9,7 +9,7 @@ PlaidInstitutionsEndpoint class >> endpointPath [
 	^ Path / 'institutions'
 ]
 
-{ #category : #endpoints }
+{ #category : #api }
 PlaidInstitutionsEndpoint >> institutionWithId: anInstitutionId [
 	<endpoint: 'get_by_id'>
 	<post>
@@ -19,7 +19,7 @@ PlaidInstitutionsEndpoint >> institutionWithId: anInstitutionId [
 	^ PJInstitutionResponse fromJson: self execute
 ]
 
-{ #category : #endpoints }
+{ #category : #api }
 PlaidInstitutionsEndpoint >> listFrom: anOffset count: aCount [
 	<endpoint: 'get'>
 	<post>

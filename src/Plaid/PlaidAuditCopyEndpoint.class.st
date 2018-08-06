@@ -1,11 +1,6 @@
 Class {
 	#name : #PlaidAuditCopyEndpoint,
 	#superclass : #PlaidEndpoint,
-	#instVars : [
-		'assetReportToken',
-		'auditorId',
-		'auditCopyToken'
-	],
 	#category : #'Plaid-Client'
 }
 
@@ -14,43 +9,13 @@ PlaidAuditCopyEndpoint class >> endpointPath [
 	^ Path / 'asset_report' / 'audit_copy'
 ]
 
-{ #category : #accessing }
-PlaidAuditCopyEndpoint >> assetReportToken [
-	^ assetReportToken
-]
-
-{ #category : #accessing }
-PlaidAuditCopyEndpoint >> assetReportToken: anObject [
-	assetReportToken := anObject
-]
-
-{ #category : #accessing }
-PlaidAuditCopyEndpoint >> auditCopyToken [
-	^ auditCopyToken
-]
-
-{ #category : #accessing }
-PlaidAuditCopyEndpoint >> auditCopyToken: anObject [
-	auditCopyToken := anObject
-]
-
-{ #category : #accessing }
-PlaidAuditCopyEndpoint >> auditorId [
-	^ auditorId
-]
-
-{ #category : #accessing }
-PlaidAuditCopyEndpoint >> auditorId: anObject [
-	auditorId := anObject
-]
-
 { #category : #api }
-PlaidAuditCopyEndpoint >> create [
+PlaidAuditCopyEndpoint >> createWithAssetReportToken: anAssetReportToken auditorId: anAuditorId [
 	<endpoint: 'create'>
 	<post>
 	data
-		at: #asset_report_token put: self assetReportToken;
-		at: #auditor_id put: self auditorId.
+		at: #asset_report_token put: anAssetReportToken;
+		at: #auditor_id put: anAuditorId.
 	^ PJAuditCopyCreateResponse fromJson: self execute
 ]
 
@@ -63,10 +28,10 @@ PlaidAuditCopyEndpoint >> initializeOn: aClient [
 ]
 
 { #category : #api }
-PlaidAuditCopyEndpoint >> remove [
+PlaidAuditCopyEndpoint >> removeAutitCopyWithToken: aToken [
 	<endpoint: 'remove'>
 	<post>
 	data
-		at: #audit_copy_token put: self auditCopyToken.
+		at: #audit_copy_token put: aToken.
 	^ PJAuditCopyRemoveResponse fromJson: self execute
 ]

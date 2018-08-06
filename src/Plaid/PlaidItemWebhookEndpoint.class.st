@@ -1,6 +1,9 @@
 Class {
 	#name : #PlaidItemWebhookEndpoint,
 	#superclass : #PlaidAuthenticatedEndpoint,
+	#instVars : [
+		'url'
+	],
 	#category : #'Plaid-Client'
 }
 
@@ -10,9 +13,19 @@ PlaidItemWebhookEndpoint class >> endpointPath [
 ]
 
 { #category : #api }
-PlaidItemWebhookEndpoint >> update: anUrl [
+PlaidItemWebhookEndpoint >> update [
 	<endpoint: 'update'>
 	<post>
-	self dataAt: 'webhook' put: anUrl greaseString.
+	self dataAt: 'webhook' put: self url greaseString.
 	^ PJItemResponse fromJson: self execute
+]
+
+{ #category : #accessing }
+PlaidItemWebhookEndpoint >> url [
+	^ url
+]
+
+{ #category : #accessing }
+PlaidItemWebhookEndpoint >> url: anObject [
+	url := anObject
 ]

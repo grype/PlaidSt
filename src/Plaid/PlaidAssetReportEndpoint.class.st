@@ -1,13 +1,6 @@
 Class {
 	#name : #PlaidAssetReportEndpoint,
 	#superclass : #PlaidEndpoint,
-	#instVars : [
-		'accessTokens',
-		'daysRequested',
-		'clientReportId',
-		'webhook',
-		'user'
-	],
 	#category : #'Plaid-Client'
 }
 
@@ -16,65 +9,17 @@ PlaidAssetReportEndpoint class >> endpointPath [
 	^ Path / 'asset_report'
 ]
 
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> accessTokens [
-	^ accessTokens ifNil: [ {self client credentials accessToken} ]
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> accessTokens: anObject [
-	accessTokens := anObject
-]
-
 { #category : #endpoints }
 PlaidAssetReportEndpoint >> auditCopy [
 	^ self > PlaidAuditCopyEndpoint 
 ]
 
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> clientReportId [
-	^ clientReportId
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> clientReportId: anObject [
-	clientReportId := anObject
-]
-
 { #category : #api }
-PlaidAssetReportEndpoint >> create [
-	<endpoint: 'create'>
-	<post>
-	data
-		at: #access_tokens put: self accessTokens;
-		at: #days_requested put: self daysRequested.
-	self hasOptions
-		ifTrue: [ data at: #options put: self optionsData ].
-	^ PJAssetCreatedResponse fromJson: self execute
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> data [
-	^ super data
-"	| result |
-
-	result := super data.
-	result
-		at: #access_tokens put: self accessTokens;
-		at: #days_requested put: self daysRequested.
-	self hasOptions
-		ifTrue: [ result at: #options put: self optionsData ].
-	^ result"
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> daysRequested [
-	^ daysRequested
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> daysRequested: anObject [
-	daysRequested := anObject
+PlaidAssetReportEndpoint >> create: aBlock [
+	^ self > PlaidAssetReportCreateEndpoint
+		in: [ :endpoint | 
+			aBlock cull: endpoint.
+			endpoint execute ]
 ]
 
 { #category : #api }
@@ -117,24 +62,4 @@ PlaidAssetReportEndpoint >> optionsData [
 	self webhook ifNotNil: [ :val | dict at: #webhook put: val ].
 	self user ifNotNil: [ :val | dict at: #user put: val ].
 	^ dict
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> user [
-	^ user
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> user: anObject [
-	user := anObject
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> webhook [
-	^ webhook
-]
-
-{ #category : #accessing }
-PlaidAssetReportEndpoint >> webhook: anObject [
-	webhook := anObject
 ]
