@@ -64,3 +64,7 @@ API calls may also raise an error, which could be at the transport, SDK or API l
 ```smalltalk
 [client item list] on: Error do: [...]
 ```
+
+### Coverage
+
+<img src="https://github.com/grype/PlaidSt/raw/master/resources/plaid-map.png" width="50%" title="API Coverage Map">
