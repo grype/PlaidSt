@@ -1,5 +1,5 @@
 # PlaidSt
-Java Bindings for the Plaid API (https://www.plaid.com/docs).
+Pharo Smalltalk Bindings for the Plaid API (https://www.plaid.com/docs).
 
 The whole available Plaid API is defined in the `PlaidClient` and various subclasses of `PlaidEndpoint`. Link support is provided via `JSPlaid`.
 
