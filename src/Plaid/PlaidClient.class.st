@@ -203,7 +203,7 @@ PlaidClient >> item [
 
 { #category : #endpoints }
 PlaidClient >> transactions [
-	^ self > PlaidTransactionsEndpoint  
+	^ self > PlaidTransactionsEndpoint 
 ]
 
 { #category : #http }

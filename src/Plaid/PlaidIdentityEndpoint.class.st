@@ -10,7 +10,7 @@ PlaidIdentityEndpoint class >> endpointPath [
 ]
 
 { #category : #api }
-PlaidIdentityEndpoint >> list [
+PlaidIdentityEndpoint >> get [
 	<endpoint: 'get'>
 	<post>
 	^ PlaidIdentityResponse fromJson: self execute

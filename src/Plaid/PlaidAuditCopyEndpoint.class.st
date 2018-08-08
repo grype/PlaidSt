@@ -28,7 +28,7 @@ PlaidAuditCopyEndpoint >> initializeOn: aClient [
 ]
 
 { #category : #api }
-PlaidAuditCopyEndpoint >> removeAutitCopyWithToken: aToken [
+PlaidAuditCopyEndpoint >> removeAuditCopyWithToken: aToken [
 	<endpoint: 'remove'>
 	<post>
 	data

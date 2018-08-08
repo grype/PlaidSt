@@ -10,7 +10,7 @@ PlaidInstitutionsEndpoint class >> endpointPath [
 ]
 
 { #category : #api }
-PlaidInstitutionsEndpoint >> institutionWithId: anInstitutionId [
+PlaidInstitutionsEndpoint >> getById: anInstitutionId [
 	<endpoint: 'get_by_id'>
 	<post>
 	self
@@ -20,7 +20,7 @@ PlaidInstitutionsEndpoint >> institutionWithId: anInstitutionId [
 ]
 
 { #category : #api }
-PlaidInstitutionsEndpoint >> listFrom: anOffset count: aCount [
+PlaidInstitutionsEndpoint >> getFrom: anOffset count: aCount [
 	<endpoint: 'get'>
 	<post>
 	self
