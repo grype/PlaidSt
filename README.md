@@ -64,6 +64,35 @@ API calls may also raise an error, which could be at either the transport, SDK o
 [client item get] on: Error do: [...]
 ```
 
+### Using Link with Seaside
+
+Use the following snippet as a guide to rendering Link in a Seaside component:
+
+```smalltalk
+MyLinkComponent>>renderContentOn: html
+	super renderContentOn: html.
+	html
+		script:
+			((html javascript plaid
+				create: self plaidClient
+				with: [ :builder | self buildLinkPropertiesOn: builder ]) call: 'open').
+
+MyLinkComponent>>buildLinkPropertiesOn: aBuilder
+	aBuilder
+		product: #(#transactions ...);
+		onLoad: [ ... ];
+		onSuccess: [ :accessToken :meta | ... ];
+		onExit: [ :err :meta | ... ];
+		onEvent: [ :event :meta | ... ].
+
+    "Existing link could be updated. This may need to happen when user is required to authenticate again"
+    "In which case, #isUpdating would return true..."
+	self isUpdating
+		ifTrue: [ aBuilder token: self publicToken ].
+
+
+```
+
 ### Coverage
 
 <img src="https://github.com/grype/PlaidSt/raw/master/resources/plaid-map.png" width="50%" title="API Coverage Map">
