@@ -37,32 +37,31 @@ client := PlaidClient sandbox
 	yourself.
 
 "Institutions"
-client institutions listFrom: 0 count: 100.
+client institutions getFrom: 0 count: 100.
 client institutions search: 'Platypus' products: nil.
-client institutions institutionWithId: 'ins_10'.
+client institutions getById: 'ins_10'.
 
 "Public tokens"
 client publicToken create.
 client publicToken exchange: 'public-sandbox-...'.
 
 "Other fun things which should be self-explanatory"
-client accounts list.
-client item list.
-client transactions 
-    startDate: Date today - 1 days; 
-    endDate: Date today; 
-    accountIds: nil; 
-    count: 300; 
-    offset: 0; 
-    list.
+client accounts get.
+client item get.
+client transactions get: [:endpoint | 
+    endpoint startDate: Date today - 1 days; 
+    	endDate: Date today; 
+    	accountIds: nil; 
+    	count: 300; 
+    	offset: 0].
 ```
 
-API calls are synchronous and return responses that are defined in subclasses of `PlaidResponse`. Fork those calls if you'd like things asynchronous.
+API calls are synchronous and return responses that are defined in subclasses of `PlaidResponse`. Fork those calls if you'd like things asynchronously.
 
-API calls may also raise an error, which could be at the transport, SDK or API level. You may want to wrap those API calls in a block and handle errors via #on:do:
+API calls may also raise an error, which could be at either the transport, SDK or API level. You may want to wrap those API calls in a block and handle errors via #on:do:
 
 ```smalltalk
-[client item list] on: Error do: [...]
+[client item get] on: Error do: [...]
 ```
 
 ### Coverage
