@@ -69,6 +69,10 @@ API calls may also raise an error, which could be at either the transport, SDK o
 Use the following snippet as a guide to rendering Link in a Seaside component:
 
 ```smalltalk
+MyLinkComponent class>>initialize
+	(WAAdmin register: self asApplicationAt: 'link')
+		addLibrary: PlaidLinkLibrary.
+		
 MyLinkComponent>>renderContentOn: html
 	super renderContentOn: html.
 	html
@@ -89,7 +93,6 @@ MyLinkComponent>>buildLinkPropertiesOn: aBuilder
     "In which case, #isUpdating would return true..."
 	self isUpdating
 		ifTrue: [ aBuilder token: self publicToken ].
-
 
 ```
 
