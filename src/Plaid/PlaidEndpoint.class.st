@@ -1,3 +1,14 @@
+"
+I am an abstract endpoint. My subclasses implement concrete endpoints.
+
+I provide basic storage of data via data ivar. My subclasses either override #data accessor, or set its contents directly. Look at #configureOn: to see what this data is used for...
+ 
+Internal Representation and Key Implementation Points.
+
+    Instance Variables
+	data:		<Dictionary>
+
+"
 Class {
 	#name : #PlaidEndpoint,
 	#superclass : #UnrestEndpoint,

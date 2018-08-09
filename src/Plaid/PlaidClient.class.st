@@ -1,26 +1,35 @@
 "
 I am a RESTful API client for Plaid (https://plaid.com/).
 
-I employ a builder-like interface to create PlaidEndpoint's, which are used to drive all of my communication with the REST service. This is accomplished via the general purpose #/ message, as well as various specialized messages, categorized under #endpoints.
+I employ a builder-like interface to create PlaidEndpoint's, which are used to drive all of my communication with the REST service.
 
 Before making any requests, however, I should be configured with a baseURL and an instance of PlaidCredentials, both of which are used to configure HTTP requests for each endpoint. See below for an example on how to create an instance of me.
 
 Example:
    | client |
 	""create client""
-	client := PlaidClient sandbox credentials: (PlaidCredentials new publicKey: ''; secret: ''; clientID: ''; yourself).
+	client := PlaidClient sandbox
+		clientName: 'Acme' 
+		credentials: (PlaidCredentials new publicKey: ''; secret: ''; clientID: ''; yourself).
 	
-	""Specialized endpoint""
-	client getInstitutions.
-	
-	""Adhoc endpoints""
-	(client / 'institutions' / 'get')
-		withClientId;
-		withSecret;
-		at: 'count' put: 200;
-		at: 'offset' put: 0;
-		post.
+	""Institutions""
+	client institutions getFrom: 0 count: 100.
+	client institutions search: 'Platypus' products: nil.
+	client institutions getById: 'ins_10'.
 
+	""Public tokens""
+	client publicToken create.
+	client publicToken exchange: 'public-sandbox-...'.
+
+	""Other fun things which should be self-explanatory""
+	client accounts get.
+	client item get.
+	client transactions get: [:endpoint | 
+ 	   endpoint startDate: Date today - 1 days; 
+  		  	endDate: Date today; 
+    		accountIds: nil; 
+    		count: 300; 
+    		offset: 0].
 
 Instance Variables
 	baseUrl:		<ZnUrl>
