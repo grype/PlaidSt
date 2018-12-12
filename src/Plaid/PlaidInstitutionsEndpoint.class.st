@@ -33,6 +33,11 @@ PlaidInstitutionsEndpoint >> getFrom: anOffset count: aCount [
 ]
 
 { #category : #api }
+PlaidInstitutionsEndpoint >> list [
+	^ self getFrom: 0 count: 100
+]
+
+{ #category : #api }
 PlaidInstitutionsEndpoint >> search: aQueryString products: aProductCollection [
 	<endpoint: 'search'>
 	<post>
