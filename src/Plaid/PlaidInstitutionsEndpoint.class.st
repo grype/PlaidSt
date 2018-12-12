@@ -1,12 +1,34 @@
 Class {
 	#name : #PlaidInstitutionsEndpoint,
 	#superclass : #PlaidEndpoint,
-	#category : #'Plaid-Client'
+	#traits : 'TPlaidEnumeration',
+	#classTraits : 'TPlaidEnumeration classTrait',
+	#category : #'Plaid-Endpoints'
 }
+
+{ #category : #'as yet unclassified' }
+PlaidInstitutionsEndpoint class >> defaultCount [
+	^ 100
+]
 
 { #category : #accessing }
 PlaidInstitutionsEndpoint class >> endpointPath [
 	^ Path / 'institutions'
+]
+
+{ #category : #enumerating }
+PlaidInstitutionsEndpoint >> enumerate: aPager [
+	| result institutions |
+
+	result := self getFrom: aPager index count: aPager pageSize.
+	institutions := result institutions.
+	aPager atEnd: aPager index * aPager pageSize >= result totalInstitutions.
+	^ institutions
+]
+
+{ #category : #enumerating }
+PlaidInstitutionsEndpoint >> enumerationPageSize [
+	^ PlaidPager maxPageSize 
 ]
 
 { #category : #api }
@@ -24,17 +46,12 @@ PlaidInstitutionsEndpoint >> getFrom: anOffset count: aCount [
 	<endpoint: 'get'>
 	<post>
 	self
-		withClientId;
-		withSecret.
-	self
 		dataAt: #offset put: anOffset;
 		dataAt: #count put: aCount.
+	self
+		withClientId;
+		withSecret.
 	^ PlaidInstitutionsResponse fromJson: self execute
-]
-
-{ #category : #api }
-PlaidInstitutionsEndpoint >> list [
-	^ self getFrom: 0 count: 100
 ]
 
 { #category : #api }

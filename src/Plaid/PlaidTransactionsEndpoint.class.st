@@ -1,7 +1,7 @@
 Class {
 	#name : #PlaidTransactionsEndpoint,
 	#superclass : #PlaidAuthenticatedEndpoint,
-	#category : #'Plaid-Client'
+	#category : #'Plaid-Endpoints'
 }
 
 { #category : #api }

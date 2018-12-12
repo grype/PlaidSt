@@ -50,7 +50,7 @@ Class {
 		'SandboxEnvironment',
 		'SandboxUrl'
 	],
-	#category : #'Plaid-Client'
+	#category : #'Plaid-Core'
 }
 
 { #category : #accessing }

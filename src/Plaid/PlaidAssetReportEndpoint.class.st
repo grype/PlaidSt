@@ -1,7 +1,7 @@
 Class {
 	#name : #PlaidAssetReportEndpoint,
 	#superclass : #PlaidEndpoint,
-	#category : #'Plaid-Client'
+	#category : #'Plaid-Endpoints'
 }
 
 { #category : #accessing }

@@ -8,7 +8,7 @@ Class {
 		'webhook',
 		'user'
 	],
-	#category : #'Plaid-Client'
+	#category : #'Plaid-Endpoints'
 }
 
 { #category : #accessing }

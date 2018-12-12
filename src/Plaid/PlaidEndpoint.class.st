@@ -15,7 +15,7 @@ Class {
 	#instVars : [
 		'data'
 	],
-	#category : #'Plaid-Client'
+	#category : #'Plaid-Endpoints'
 }
 
 { #category : #data }

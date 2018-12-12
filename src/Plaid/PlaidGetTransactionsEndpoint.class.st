@@ -8,7 +8,7 @@ Class {
 		'count',
 		'offset'
 	],
-	#category : #'Plaid-Client'
+	#category : #'Plaid-Endpoints'
 }
 
 { #category : #accessing }

@@ -16,7 +16,7 @@ Class {
 	#instVars : [
 		'response'
 	],
-	#category : #'Plaid-Client'
+	#category : #'Plaid-Core'
 }
 
 { #category : #'instance creation' }

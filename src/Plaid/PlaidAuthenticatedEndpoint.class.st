@@ -1,7 +1,7 @@
 Class {
 	#name : #PlaidAuthenticatedEndpoint,
 	#superclass : #PlaidEndpoint,
-	#category : #'Plaid-Client'
+	#category : #'Plaid-Endpoints'
 }
 
 { #category : #initialization }

@@ -22,7 +22,7 @@ Class {
 		'accessToken',
 		'clientId'
 	],
-	#category : #'Plaid-Client'
+	#category : #'Plaid-Core'
 }
 
 { #category : #accessing }
