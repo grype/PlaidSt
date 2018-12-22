@@ -1,8 +1,8 @@
 Class {
 	#name : #PlaidInstitutionsEndpoint,
 	#superclass : #PlaidEndpoint,
-	#traits : 'TPlaidEnumeration',
-	#classTraits : 'TPlaidEnumeration classTrait',
+	#traits : 'TPlaidEnumerating',
+	#classTraits : 'TPlaidEnumerating classTrait',
 	#category : #'Plaid-Endpoints'
 }
 
@@ -17,18 +17,15 @@ PlaidInstitutionsEndpoint class >> endpointPath [
 ]
 
 { #category : #enumerating }
-PlaidInstitutionsEndpoint >> enumerate: aPager [
-	| result institutions |
+PlaidInstitutionsEndpoint >> enumerateWith: aCursor [
+	| result institutions batchSize |
 
-	result := self getFrom: aPager index count: aPager pageSize.
+	batchSize := self defaultEnumerationSize.
+	result := self getFrom: aCursor offset count: batchSize.
 	institutions := result institutions.
-	aPager atEnd: aPager index * aPager pageSize >= result totalInstitutions.
+	institutions ifNotNil: [ :val | aCursor offset: aCursor offset + institutions size ].
+	aCursor hasMore: aCursor offset < result totalInstitutions.
 	^ institutions
-]
-
-{ #category : #enumerating }
-PlaidInstitutionsEndpoint >> enumerationPageSize [
-	^ PlaidPager maxPageSize 
 ]
 
 { #category : #api }
