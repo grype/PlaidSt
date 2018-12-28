@@ -21,9 +21,11 @@ PlaidSandboxPublicTokenEndpoint >> create [
 	institutionId ifNotNil: [ :val | self dataAt: #institution_id put: val ].
 	initialProducts ifNotNil: [ :val | self dataAt: #initial_products put: val ].
 	options ifNotNil: [ :val | self dataAt: #options put: val ].
-	^ self
-		withPublicKey;
-		execute
+	^ PlaidPublicTokenResponse
+		fromJson:
+			(self
+				withPublicKey;
+				execute)
 ]
 
 { #category : #accessing }
