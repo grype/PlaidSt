@@ -1,6 +1,8 @@
 Class {
 	#name : #PlaidGetTransactionsEndpoint,
 	#superclass : #PlaidAuthenticatedEndpoint,
+	#traits : 'TPlaidEnumerating',
+	#classTraits : 'TPlaidEnumerating classTrait',
 	#instVars : [
 		'startDate',
 		'endDate',
@@ -57,6 +59,18 @@ PlaidGetTransactionsEndpoint >> endDate [
 { #category : #accessing }
 PlaidGetTransactionsEndpoint >> endDate: anObject [
 	endDate := anObject
+]
+
+{ #category : #enumerating }
+PlaidGetTransactionsEndpoint >> enumerateWith: aCursor [
+	| result transactions batchSize |
+
+	batchSize := self defaultEnumerationSize.
+	result := self offset: aCursor offset; count: batchSize; execute.
+	transactions := result transactions.
+	transactions ifNotNil: [ :val | aCursor offset: aCursor offset + transactions size ].
+	aCursor hasMore: aCursor offset < result totalTransactions.
+	^ transactions
 ]
 
 { #category : #executing }
