@@ -80,7 +80,21 @@ PlaidClient class >> initialize [
 	ProductionEnvironment := 'production'.
 	SandboxUrl := ZnUrl fromString: 'https://sandbox.plaid.com/'.
 	DevelopmentUrl := ZnUrl fromString: 'https://development.plaid.com/'.
-	ProductionUrl := ZnUrl fromString: 'https://production.plaid.com/'
+	ProductionUrl := ZnUrl fromString: 'https://production.plaid.com/'.
+	self initializeProductConstants
+]
+
+{ #category : #'class initialization' }
+PlaidClient class >> initializeProductConstants [
+	#(#assets #auth #balance #transactions #credit_details #income #identity)
+		do: [ :value | 
+			| key |
+
+			key := '' writeStream.
+			key nextPutAll: 'Plaid'.
+			value splitOn: '_' do: [ :each | key nextPutAll: each capitalized ].
+			key nextPutAll: 'Product'.
+			Smalltalk at: key contents asSymbol put: value ]
 ]
 
 { #category : #'instance creation' }
@@ -213,6 +227,21 @@ PlaidClient >> item [
 { #category : #endpoints }
 PlaidClient >> sandbox [
 	^ self > PlaidSandboxEndpoint 
+]
+
+{ #category : #api }
+PlaidClient >> sandboxCreateItemWithInstitution: anInstitution [
+	^ self
+		sandboxCreateItemWithInstitution: anInstitution
+		products: (anInstitution products copyWithoutAll: (Array with: PlaidBalanceProduct with: PlaidCreditDetailsProduct))
+]
+
+{ #category : #api }
+PlaidClient >> sandboxCreateItemWithInstitution: anInstitution products: aCollectionOfProducts [
+	^ (self sandbox publicToken
+		institutionId: anInstitution institutionId;
+		initialProducts: aCollectionOfProducts;
+		create) publicToken ifNotNil: [ :publicToken | self item publicToken exchange: publicToken ]
 ]
 
 { #category : #endpoints }

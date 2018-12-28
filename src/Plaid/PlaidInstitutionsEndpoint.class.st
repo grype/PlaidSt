@@ -6,7 +6,7 @@ Class {
 	#category : #'Plaid-Endpoints'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #defaults }
 PlaidInstitutionsEndpoint class >> defaultCount [
 	^ 100
 ]
@@ -14,6 +14,11 @@ PlaidInstitutionsEndpoint class >> defaultCount [
 { #category : #accessing }
 PlaidInstitutionsEndpoint class >> endpointPath [
 	^ Path / 'institutions'
+]
+
+{ #category : #accessing }
+PlaidInstitutionsEndpoint class >> sandboxOnlyInstitutionIds [
+	^ #(#ins_109508 #ins_109509 #ins_109510 #ins_109511 #ins_109512 #ins_43)
 ]
 
 { #category : #enumerating }
@@ -26,6 +31,11 @@ PlaidInstitutionsEndpoint >> enumerateWith: aCursor [
 	institutions ifNotNil: [ :val | aCursor offset: aCursor offset + institutions size ].
 	aCursor hasMore: aCursor offset < result totalInstitutions.
 	^ institutions
+]
+
+{ #category : #api }
+PlaidInstitutionsEndpoint >> getAnyFromSandboxOnly [
+	^ self getById: self class sandboxOnlyInstitutionIds anyOne
 ]
 
 { #category : #api }
