@@ -211,6 +211,11 @@ PlaidClient >> item [
 ]
 
 { #category : #endpoints }
+PlaidClient >> sandbox [
+	^ self > PlaidSandboxEndpoint 
+]
+
+{ #category : #endpoints }
 PlaidClient >> transactions [
 	^ self > PlaidTransactionsEndpoint 
 ]
