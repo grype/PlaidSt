@@ -22,10 +22,10 @@ PlaidInstitutionsEndpoint class >> sandboxOnlyInstitutionIds [
 ]
 
 { #category : #enumerating }
-PlaidInstitutionsEndpoint >> enumerateWith: aCursor [
+PlaidInstitutionsEndpoint >> enumerateWith: aCursor limit: aLimit [
 	| result institutions batchSize |
 
-	batchSize := self defaultEnumerationSize.
+	batchSize := aLimit ifNil: [ self defaultEnumerationSize ].
 	result := self getFrom: aCursor offset count: batchSize.
 	institutions := result institutions.
 	institutions ifNotNil: [ :val | aCursor offset: aCursor offset + institutions size ].

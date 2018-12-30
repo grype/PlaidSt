@@ -62,11 +62,14 @@ PlaidGetTransactionsEndpoint >> endDate: anObject [
 ]
 
 { #category : #enumerating }
-PlaidGetTransactionsEndpoint >> enumerateWith: aCursor [
+PlaidGetTransactionsEndpoint >> enumerateWith: aCursor limit: aLimit [
 	| result transactions batchSize |
 
-	batchSize := self defaultEnumerationSize.
-	result := self offset: aCursor offset; count: batchSize; execute.
+	batchSize := aLimit ifNil: [ self defaultEnumerationSize ].
+	result := self
+		offset: aCursor offset;
+		count: batchSize;
+		execute.
 	transactions := result transactions.
 	transactions ifNotNil: [ :val | aCursor offset: aCursor offset + transactions size ].
 	aCursor hasMore: aCursor offset < result totalTransactions.
