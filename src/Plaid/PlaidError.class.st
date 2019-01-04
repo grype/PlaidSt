@@ -10,6 +10,17 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidError >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ code = anObject code and: [ type = anObject type ]
+]
+
 { #category : #accessing }
 PlaidError >> code [
 	^ code
@@ -54,7 +65,9 @@ PlaidError >> displayMessageDescription [
 
 { #category : #comparing }
 PlaidError >> hash [
-	^ type hash + code hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ code hash bitXor: type hash
 ]
 
 { #category : #accessing }

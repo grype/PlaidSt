@@ -9,6 +9,18 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidAccountBalance >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ available = anObject available
+		and: [ current = anObject current and: [ limit = anObject limit ] ]
+]
+
 { #category : #accessing }
 PlaidAccountBalance >> available [
 	^ available
@@ -49,6 +61,13 @@ PlaidAccountBalance >> currentDescription [
 		jsonName: #current;
 		beOptional;
 		yourself
+]
+
+{ #category : #comparing }
+PlaidAccountBalance >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ available hash bitXor: (current hash bitXor: limit hash)
 ]
 
 { #category : #accessing }

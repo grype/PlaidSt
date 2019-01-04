@@ -9,6 +9,18 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidWarning >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ cause = anObject cause
+		and: [ code = anObject code and: [ type = anObject type ] ]
+]
+
 { #category : #accessing }
 PlaidWarning >> cause [
 	^ cause
@@ -41,7 +53,9 @@ PlaidWarning >> codeDescription [
 
 { #category : #comparing }
 PlaidWarning >> hash [
-	^ type hash + code hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ cause hash bitXor: (code hash bitXor: type hash)
 ]
 
 { #category : #testing }

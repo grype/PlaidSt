@@ -13,6 +13,22 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidLocation >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ address = anObject address
+		and: [ city = anObject city
+				and: [ latitude = anObject latitude
+						and: [ longitude = anObject longitude
+								and: [ state = anObject state
+										and: [ storeNumber = anObject storeNumber and: [ zip = anObject zip ] ] ] ] ] ]
+]
+
 { #category : #accessing }
 PlaidLocation >> address [
 	^ address
@@ -63,6 +79,20 @@ PlaidLocation >> hasAddress [
 { #category : #testing }
 PlaidLocation >> hasGeolocation [
 	^ latitude isNotNil and: [ longitude isNotNil  ]
+]
+
+{ #category : #comparing }
+PlaidLocation >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ address hash
+		bitXor:
+			(city hash
+				bitXor:
+					(latitude hash
+						bitXor:
+							(longitude hash
+								bitXor: (state hash bitXor: (storeNumber hash bitXor: zip hash)))))
 ]
 
 { #category : #testing }

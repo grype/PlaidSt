@@ -9,6 +9,25 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidInstitutionCredential >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ label = anObject label
+		and: [ name = anObject name and: [ type = anObject type ] ]
+]
+
+{ #category : #comparing }
+PlaidInstitutionCredential >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ label hash bitXor: (name hash bitXor: type hash)
+]
+
 { #category : #accessing }
 PlaidInstitutionCredential >> label [
 	^ label

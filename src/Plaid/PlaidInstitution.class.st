@@ -12,6 +12,17 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidInstitution >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ institutionId = anObject institutionId
+]
+
 { #category : #accessing }
 PlaidInstitution >> credentials [
 	^ credentials
@@ -57,6 +68,8 @@ PlaidInstitution >> hasMfaDescription [
 
 { #category : #comparing }
 PlaidInstitution >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
 	^ institutionId hash
 ]
 

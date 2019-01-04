@@ -26,6 +26,17 @@ PlaidTransaction class >> defaultCurrencyCode [
 	^ 'USD'
 ]
 
+{ #category : #comparing }
+PlaidTransaction >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ transactionId = anObject transactionId
+]
+
 { #category : #accessing }
 PlaidTransaction >> accountId [
 	^ accountId
@@ -156,7 +167,9 @@ PlaidTransaction >> hasLocation [
 
 { #category : #comparing }
 PlaidTransaction >> hash [
-	^ transactionId hash bitXor: accountId hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ transactionId hash
 ]
 
 { #category : #accessing }

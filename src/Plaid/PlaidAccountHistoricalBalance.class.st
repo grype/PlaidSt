@@ -9,6 +9,18 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidAccountHistoricalBalance >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ current = anObject current
+		and: [ date = anObject date and: [ limit = anObject limit ] ]
+]
+
 { #category : #description }
 PlaidAccountHistoricalBalance >> availableDescription [
 	<magritteDescription>
@@ -60,6 +72,13 @@ PlaidAccountHistoricalBalance >> dateDescription [
 		jsonName: #date;
 		beOptional;
 		yourself
+]
+
+{ #category : #comparing }
+PlaidAccountHistoricalBalance >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ current hash bitXor: (date hash bitXor: limit hash)
 ]
 
 { #category : #accessing }

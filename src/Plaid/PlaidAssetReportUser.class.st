@@ -13,6 +13,17 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidAssetReportUser >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ ssn = anObject ssn and: [ clientUserId = anObject clientUserId ]
+]
+
 { #category : #accessing }
 PlaidAssetReportUser >> clientUserId [
 	^ clientUserId
@@ -75,7 +86,9 @@ PlaidAssetReportUser >> firstNameDescription [
 
 { #category : #comparing }
 PlaidAssetReportUser >> hash [
-	^ clientUserId hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ ssn hash bitXor: clientUserId hash
 ]
 
 { #category : #accessing }

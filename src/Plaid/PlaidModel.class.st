@@ -11,13 +11,6 @@ Class {
 	#category : #'Plaid-Models'
 }
 
-{ #category : #comparing }
-PlaidModel >> = another [
-	^ (another isKindOf: self class)
-		ifTrue: [ self hash = another hash ]
-		ifFalse: [ false ]
-]
-
 { #category : #descriptions }
 PlaidModel >> magritteDescription [
 	| description |

@@ -14,6 +14,18 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidPaymentMeta >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ ppdId = anObject ppdId
+		and: [ referenceNumber = anObject referenceNumber ]
+]
+
 { #category : #accessing }
 PlaidPaymentMeta >> byOrderOf [
 	^ byOrderOf
@@ -33,6 +45,13 @@ PlaidPaymentMeta >> byOrderOfDescription [
 		jsonName: #by_order_of;
 		beOptional;
 		yourself
+]
+
+{ #category : #comparing }
+PlaidPaymentMeta >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ ppdId hash bitXor: referenceNumber hash
 ]
 
 { #category : #accessing }

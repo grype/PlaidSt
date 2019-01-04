@@ -13,6 +13,17 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidAccount >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ accountId = anObject accountId
+]
+
 { #category : #accessing }
 PlaidAccount >> accountId [
 	^ accountId
@@ -66,6 +77,8 @@ PlaidAccount >> balancesPrintString [
 
 { #category : #comparing }
 PlaidAccount >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
 	^ accountId hash
 ]
 

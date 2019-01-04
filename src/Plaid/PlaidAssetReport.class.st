@@ -12,6 +12,18 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidAssetReport >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ clientReportId = anObject clientReportId
+		and: [ assetReportId = anObject assetReportId ]
+]
+
 { #category : #accessing }
 PlaidAssetReport >> assetReportId [
 	^ assetReportId
@@ -94,7 +106,9 @@ PlaidAssetReport >> daysRequestedDescription [
 
 { #category : #comparing }
 PlaidAssetReport >> hash [
-	^ assetReportId hash
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ clientReportId hash bitXor: assetReportId hash
 ]
 
 { #category : #accessing }

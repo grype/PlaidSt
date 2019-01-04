@@ -10,6 +10,19 @@ Class {
 	#category : #'Plaid-Models'
 }
 
+{ #category : #comparing }
+PlaidIdentity >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ addresses = anObject addresses
+		and: [ emails = anObject emails
+				and: [ names = anObject names and: [ phoneNumbers = anObject phoneNumbers ] ] ]
+]
+
 { #category : #accessing }
 PlaidIdentity >> addresses [
 	^ addresses
@@ -54,6 +67,14 @@ PlaidIdentity >> emailsDescription [
 		beOrdered;
 		beOptional;
 		yourself
+]
+
+{ #category : #comparing }
+PlaidIdentity >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ addresses hash
+		bitXor: (emails hash bitXor: (names hash bitXor: phoneNumbers hash))
 ]
 
 { #category : #accessing }
