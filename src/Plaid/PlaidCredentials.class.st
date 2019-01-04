@@ -25,6 +25,19 @@ Class {
 	#category : #'Plaid-Core'
 }
 
+{ #category : #comparing }
+PlaidCredentials >> = anObject [
+	"Answer whether the receiver and anObject represent the same object."
+
+	self == anObject
+		ifTrue: [ ^ true ].
+	self class = anObject class
+		ifFalse: [ ^ false ].
+	^ accessToken = anObject accessToken
+		and: [ clientId = anObject clientId
+				and: [ publicKey = anObject publicKey and: [ secret = anObject secret ] ] ]
+]
+
 { #category : #accessing }
 PlaidCredentials >> accessToken [
 	^ accessToken
@@ -43,6 +56,14 @@ PlaidCredentials >> clientId [
 { #category : #accessing }
 PlaidCredentials >> clientId: anObject [
 	clientId := anObject
+]
+
+{ #category : #comparing }
+PlaidCredentials >> hash [
+	"Answer an integer value that is related to the identity of the receiver."
+
+	^ accessToken hash
+		bitXor: (clientId hash bitXor: (publicKey hash bitXor: secret hash))
 ]
 
 { #category : #accessing }
