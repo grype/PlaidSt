@@ -2,7 +2,7 @@ Trait {
 	#name : #TPlaidEnumerating,
 	#traits : 'TUnrestEnumerating',
 	#classTraits : 'TUnrestEnumerating classTrait',
-	#category : #Plaid
+	#category : #'Plaid-Core'
 }
 
 { #category : #accessing }

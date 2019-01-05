@@ -7,7 +7,7 @@ Class {
 		'offset',
 		'hasMore'
 	],
-	#category : #Plaid
+	#category : #'Plaid-Core'
 }
 
 { #category : #accessing }
