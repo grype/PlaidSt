@@ -41,6 +41,12 @@ client institutions getFrom: 0 count: 100.
 client institutions search: 'Platypus' products: nil.
 client institutions getById: 'ins_10'.
 
+"Enumeration"
+client institutions first: 10. "Fetches first 10 institutions"
+client institutions collect: #yourself as: Set. "Fetches all institutions into a Set"
+client institutions select: [:each | each products includes: 'identity']. "Fetches all institutions and selects only those that provide 'identity' product"
+client institutions detect: [:each | each name asLowercase includesSubstring: 'platypus' ]. "Fetches institutions until it finds one that has the word 'platypus' in the name, returning the resulting institution object..."
+
 "Public tokens"
 client publicToken create.
 client publicToken exchange: 'public-sandbox-...'.
@@ -48,12 +54,26 @@ client publicToken exchange: 'public-sandbox-...'.
 "Other fun things which should be self-explanatory"
 client accounts get.
 client item get.
+
 client transactions get: [:endpoint | 
     endpoint startDate: Date today - 1 days; 
     	endDate: Date today; 
     	accountIds: nil; 
     	count: 300; 
     	offset: 0].
+      
+"Select all uber related transactions in the last 30 days"
+client transactions get 
+  startDate: Date today - 30 days; 
+  endDate: Date today;
+  select: [:each | each name asLowercase includesSubstring: 'uber'].
+
+"Total spent on uber in the last 30 days"
+(client transactions get 
+  startDate: Date today - 30 days; 
+  endDate: Date today;
+  select: [:each | each name asLowercase includesSubstring: 'uber']
+  thenCollect: #amount) sum.
 ```
 
 API calls are synchronous and return responses that are defined in subclasses of `PlaidResponse`. Fork those calls if you'd like things asynchronously.
