@@ -74,6 +74,12 @@ client transactions get
   endDate: Date today;
   select: [:each | each name asLowercase includesSubstring: 'uber']
   thenCollect: #amount) sum.
+  
+"Select all transactions in the last 30 days and group them by date"
+client transactions get 
+  startDate: Date today - 30 days; 
+  endDate: Date today;
+  groupedBy: [ :each | each date ].
 ```
 
 API calls are synchronous and return responses that are defined in subclasses of `PlaidResponse`. Fork those calls if you'd like things asynchronously.
