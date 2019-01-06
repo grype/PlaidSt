@@ -11,7 +11,9 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #PlaidEndpoint,
-	#superclass : #UnrestEndpoint,
+	#superclass : #Object,
+	#traits : 'TUnrestEndpoint',
+	#classTraits : 'TUnrestEndpoint classTrait',
 	#instVars : [
 		'data'
 	],
@@ -33,7 +35,6 @@ PlaidEndpoint >> client [
 
 { #category : #configuring }
 PlaidEndpoint >> configureOn: http [
-	super configureOn: http.
 	http request method = #get
 		ifTrue: [ http queryAddAll: self data ]
 		ifFalse: [ http contents: self data ].
