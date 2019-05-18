@@ -18,7 +18,7 @@ PlaidAssetReportCreateEndpoint class >> endpointPath [
 
 { #category : #accessing }
 PlaidAssetReportCreateEndpoint >> accessTokens [
-	^ accessTokens ifNil: [ {self client credentials accessToken} ]
+	^ accessTokens ifNil: [ {self wsClient credentials accessToken} ]
 ]
 
 { #category : #accessing }
@@ -28,7 +28,7 @@ PlaidAssetReportCreateEndpoint >> accessTokens: anObject [
 
 { #category : #endpoints }
 PlaidAssetReportCreateEndpoint >> auditCopy [
-	^ self > PlaidAuditCopyEndpoint 
+	^ self / PlaidAuditCopyEndpoint 
 ]
 
 { #category : #accessing }
@@ -53,7 +53,6 @@ PlaidAssetReportCreateEndpoint >> daysRequested: anObject [
 
 { #category : #executing }
 PlaidAssetReportCreateEndpoint >> execute [
-	<endpoint>
 	<post>
 	data
 		at: #access_tokens put: self accessTokens;

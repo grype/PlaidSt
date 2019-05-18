@@ -11,12 +11,12 @@ PlaidAccountsEndpoint class >> endpointPath [
 
 { #category : #endpoints }
 PlaidAccountsEndpoint >> balance [
-	^ self > PlaidBalancesEndpoint
+	^ self / PlaidBalancesEndpoint
 ]
 
 { #category : #api }
 PlaidAccountsEndpoint >> get [
-	<endpoint: 'get'>
+	<path: 'get'>
 	<post>
 	^ PlaidAccountsResponse fromJson: self execute
 ]

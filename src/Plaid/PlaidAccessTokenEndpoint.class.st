@@ -11,17 +11,17 @@ PlaidAccessTokenEndpoint class >> endpointPath [
 
 { #category : #api }
 PlaidAccessTokenEndpoint >> invalidate [
-	<endpoint: 'invalidate'>
+	<path: 'invalidate'>
 	<post>
 	^ PlaidNewAccessTokenResponse fromJson: self execute
 ]
 
 { #category : #api }
 PlaidAccessTokenEndpoint >> updateVersion [
-	<endpoint: 'update_version'>
+	<path: 'update_version'>
 	<post>
 	self
 		withoutAccessToken.
-	self client credentials accessToken ifNotNil: [ :value | self dataAt: 'access_token_v1' put: value ].
+	self wsClient credentials accessToken ifNotNil: [ :value | self dataAt: 'access_token_v1' put: value ].
 	^ PlaidItemAccessResponse fromJson: self execute
 ]

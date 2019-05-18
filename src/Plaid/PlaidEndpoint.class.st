@@ -12,8 +12,8 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #PlaidEndpoint,
 	#superclass : #Object,
-	#traits : 'TUnrestEndpoint',
-	#classTraits : 'TUnrestEndpoint classTrait',
+	#traits : 'TWSEndpoint',
+	#classTraits : 'TWSEndpoint classTrait',
 	#instVars : [
 		'data'
 	],
@@ -26,11 +26,6 @@ PlaidEndpoint >> authenticated [
 		withClientId;
 		withSecret;
 		withAccessToken
-]
-
-{ #category : #accessing }
-PlaidEndpoint >> client [
-	^ unrest
 ]
 
 { #category : #configuring }
@@ -74,22 +69,22 @@ PlaidEndpoint >> resetData [
 
 { #category : #data }
 PlaidEndpoint >> withAccessToken [
-	self client credentials accessToken ifNotNil: [ :value | self dataAt: 'access_token' put: value ]
+	self wsClient credentials accessToken ifNotNil: [ :value | self dataAt: 'access_token' put: value ]
 ]
 
 { #category : #data }
 PlaidEndpoint >> withClientId [ 
-	self client credentials clientId ifNotNil: [ :value | self dataAt: 'client_id' put: value ]
+	self wsClient credentials clientId ifNotNil: [ :value | self dataAt: 'client_id' put: value ]
 ]
 
 { #category : #data }
 PlaidEndpoint >> withPublicKey [
-	self client credentials publicKey ifNotNil: [ :value | self dataAt: 'public_key' put: value ]
+	self wsClient credentials publicKey ifNotNil: [ :value | self dataAt: 'public_key' put: value ]
 ]
 
 { #category : #data }
 PlaidEndpoint >> withSecret [
-	self client credentials secret ifNotNil: [ :value | self dataAt: 'secret' put: value ]
+	self wsClient credentials secret ifNotNil: [ :value | self dataAt: 'secret' put: value ]
 ]
 
 { #category : #data }

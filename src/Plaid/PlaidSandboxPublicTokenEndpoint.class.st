@@ -16,7 +16,7 @@ PlaidSandboxPublicTokenEndpoint class >> endpointPath [
 
 { #category : #api }
 PlaidSandboxPublicTokenEndpoint >> create [
-	<endpoint: 'create'>
+	<path: 'create'>
 	<post>
 	institutionId ifNotNil: [ :val | self dataAt: #institution_id put: val ].
 	initialProducts ifNotNil: [ :val | self dataAt: #initial_products put: val ].

@@ -11,12 +11,12 @@ PlaidAssetReportEndpoint class >> endpointPath [
 
 { #category : #endpoints }
 PlaidAssetReportEndpoint >> auditCopy [
-	^ self > PlaidAuditCopyEndpoint 
+	^ self / PlaidAuditCopyEndpoint 
 ]
 
 { #category : #api }
 PlaidAssetReportEndpoint >> create: aBlock [
-	^ self > PlaidAssetReportCreateEndpoint
+	^ self / PlaidAssetReportCreateEndpoint
 		in: [ :endpoint | 
 			aBlock cull: endpoint.
 			endpoint execute ]
@@ -24,7 +24,7 @@ PlaidAssetReportEndpoint >> create: aBlock [
 
 { #category : #api }
 PlaidAssetReportEndpoint >> getPDFReportWithToken: aReportToken [
-	<endpoint: 'pdf/get'>
+	<path: 'pdf/get'>
 	<post>
 	data at: #asset_report_token put: aReportToken.
 	^ self execute
@@ -32,7 +32,7 @@ PlaidAssetReportEndpoint >> getPDFReportWithToken: aReportToken [
 
 { #category : #api }
 PlaidAssetReportEndpoint >> getReportWithToken: aReportToken [
-	<endpoint: 'get'>
+	<path: 'get'>
 	<post>
 	data at: #asset_report_token put: aReportToken.
 	^ PlaidAssetResponse fromJson: self execute
@@ -48,7 +48,7 @@ PlaidAssetReportEndpoint >> initializeOn: aClient [
 
 { #category : #api }
 PlaidAssetReportEndpoint >> removeReportWithToken: anAssetReportToken [
-	<endpoint: 'remove'>
+	<path: 'remove'>
 	<post>
 	data at: #asset_report_token put: anAssetReportToken.
 	^ PlaidRemovedResponse fromJson: self execute

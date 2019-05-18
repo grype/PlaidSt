@@ -11,7 +11,7 @@ PlaidIncomeEndpoint class >> endpointPath [
 
 { #category : #api }
 PlaidIncomeEndpoint >> get [
-	<endpoint: 'get'>
+	<paht: 'get'>
 	<post>
 	^ PlaidIncomeResponse fromJson: self execute
 ]

@@ -11,7 +11,7 @@ PlaidAuthEndpoint class >> endpointPath [
 
 { #category : #api }
 PlaidAuthEndpoint >> get [
-	<endpoint: 'get'>
+	<path: 'get'>
 	<post>
 	^ PlaidAuthResponse fromJson: self execute 
 ]

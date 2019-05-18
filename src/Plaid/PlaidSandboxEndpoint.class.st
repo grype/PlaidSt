@@ -11,5 +11,5 @@ PlaidSandboxEndpoint class >> endpointPath [
 
 { #category : #endpoints }
 PlaidSandboxEndpoint >> publicToken [
-	^ self > PlaidSandboxPublicTokenEndpoint 
+	^ self / PlaidSandboxPublicTokenEndpoint 
 ]

@@ -10,7 +10,7 @@ Example:
 	""create client""
 	client := PlaidClient sandbox
 		clientName: 'Acme' 
-		credentials: (PlaidCredentials new publicKey: ''; secret: ''; clientID: ''; yourself).
+		credentials: (PlaidCredentials new publicKey: ''; secret: ''; clientId: '';).
 	
 	""Institutions""
 	client institutions getFrom: 0 count: 100.
@@ -37,7 +37,7 @@ Instance Variables
 "
 Class {
 	#name : #PlaidClient,
-	#superclass : #Unrest,
+	#superclass : #WSClient,
 	#instVars : [
 		'credentials',
 		'clientName'
@@ -129,22 +129,22 @@ PlaidClient class >> sandboxUrl [
 
 { #category : #endpoints }
 PlaidClient >> accounts [
-	^ self > PlaidAccountsEndpoint
+	^ self / PlaidAccountsEndpoint
 ]
 
 { #category : #endpoints }
 PlaidClient >> assetReport [
-	^ self > PlaidAssetReportEndpoint   
+	^ self / PlaidAssetReportEndpoint   
 ]
 
 { #category : #endpoints }
 PlaidClient >> auth [
-	^ self > PlaidAuthEndpoint
+	^ self / PlaidAuthEndpoint
 ]
 
 { #category : #endpoints }
 PlaidClient >> categories [
-	^ self > PlaidCategoriesEndpoint
+	^ self / PlaidCategoriesEndpoint
 ]
 
 { #category : #accessing }
@@ -160,8 +160,7 @@ PlaidClient >> clientName: anObject [
 { #category : #http }
 PlaidClient >> configureHttpClient: http [
 	super configureHttpClient: http.
-	http
-		headerAt: 'Plaid-Version' put: self class apiVersion
+	http headerAt: 'Plaid-Version' put: self class apiVersion
 ]
 
 { #category : #accessing }
@@ -185,12 +184,12 @@ PlaidClient >> environment [
 
 { #category : #endpoints }
 PlaidClient >> identity [
-	^ self > PlaidIdentityEndpoint   
+	^ self / PlaidIdentityEndpoint   
 ]
 
 { #category : #endpoints }
 PlaidClient >> income [
-	^ self > PlaidIncomeEndpoint 
+	^ self / PlaidIncomeEndpoint 
 ]
 
 { #category : #initialization }
@@ -201,7 +200,7 @@ PlaidClient >> initialize [
 
 { #category : #endpoints }
 PlaidClient >> institutions [
-	^ self > PlaidInstitutionsEndpoint
+	^ self / PlaidInstitutionsEndpoint
 ]
 
 { #category : #testing }
@@ -221,12 +220,12 @@ PlaidClient >> isSandboxEnvironment [
 
 { #category : #endpoints }
 PlaidClient >> item [
-	^ self > PlaidItemEndpoint 
+	^ self / PlaidItemEndpoint 
 ]
 
 { #category : #endpoints }
 PlaidClient >> sandbox [
-	^ self > PlaidSandboxEndpoint 
+	^ self / PlaidSandboxEndpoint 
 ]
 
 { #category : #api }
@@ -246,7 +245,7 @@ PlaidClient >> sandboxCreateItemWithInstitution: anInstitution products: aCollec
 
 { #category : #endpoints }
 PlaidClient >> transactions [
-	^ self > PlaidTransactionsEndpoint 
+	^ self / PlaidTransactionsEndpoint 
 ]
 
 { #category : #http }

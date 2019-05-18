@@ -11,7 +11,7 @@ PlaidBalancesEndpoint class >> endpointPath [
 
 { #category : #api }
 PlaidBalancesEndpoint >> get [
-	<endpoint: 'get'>
+	<path: 'get'>
 	<post>
 	^ PlaidAccountsResponse fromJson: self execute
 ]

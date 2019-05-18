@@ -11,14 +11,14 @@ PlaidPublicTokenEndpoint class >> endpointPath [
 
 { #category : #api }
 PlaidPublicTokenEndpoint >> create [
-	<endpoint: 'create'>
+	<path: 'create'>
 	<post>
 	^ PlaidItemAccessResponse fromJson: self execute
 ]
 
 { #category : #api }
 PlaidPublicTokenEndpoint >> exchange: aPublicToken [
-	<endpoint: 'exchange'>
+	<path: 'exchange'>
 	<post>
 	self
 		withoutAccessToken;

@@ -1,8 +1,6 @@
 Class {
 	#name : #PlaidOffsetCursor,
 	#superclass : #Object,
-	#traits : 'TUnrestEnumerationCursor',
-	#classTraits : 'TUnrestEnumerationCursor classTrait',
 	#instVars : [
 		'offset',
 		'hasMore'

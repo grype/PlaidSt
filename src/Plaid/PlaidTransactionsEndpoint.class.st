@@ -1,8 +1,8 @@
 Class {
 	#name : #PlaidTransactionsEndpoint,
 	#superclass : #PlaidAuthenticatedEndpoint,
-	#traits : 'TPlaidEnumerating',
-	#classTraits : 'TPlaidEnumerating classTrait',
+	#traits : 'TPlaidEnumeration',
+	#classTraits : 'TPlaidEnumeration classTrait',
 	#instVars : [
 		'startDate',
 		'endDate',
@@ -15,7 +15,7 @@ Class {
 
 { #category : #accessing }
 PlaidTransactionsEndpoint class >> endpointPath [
-	^ Path / 'transactions'
+	^ Path / #transactions / #get
 ]
 
 { #category : #accessing }
@@ -61,31 +61,30 @@ PlaidTransactionsEndpoint >> endDate: anObject [
 	endDate := anObject
 ]
 
-{ #category : #enumerating }
-PlaidTransactionsEndpoint >> enumerateWith: aCursor limit: aLimit [
-	| result transactions batchSize |
-
-	batchSize := aLimit ifNil: [ self defaultEnumerationSize ].
-	result := self
-		offset: aCursor offset;
-		count: batchSize;
-		get.
-	transactions := result transactions.
-	transactions ifNotNil: [ :val | aCursor offset: aCursor offset + transactions size ].
-	aCursor hasMore: aCursor offset < result totalTransactions.
-	^ transactions
-]
-
 { #category : #api }
-PlaidTransactionsEndpoint >> get [
-	<endpoint: 'get'>
+PlaidTransactionsEndpoint >> execute [
 	<post>
-	^ PlaidTransactionsResponse fromJson: self execute
+	^ PlaidTransactionsResponse fromJson: super execute
 ]
 
 { #category : #accessing }
 PlaidTransactionsEndpoint >> hasOptions [
 	^ ((OrderedCollection with: accountIds with: count with: offset) flattened reject: #isNil) isNotEmpty
+]
+
+{ #category : #enumerating }
+PlaidTransactionsEndpoint >> next: anInt with: aCursor [
+	| result transactions batchSize |
+	batchSize := anInt ifNil: [ self defaultEnumerationSize ].
+	result := self
+		offset: aCursor offset;
+		count: batchSize;
+		execute.
+	transactions := result transactions.
+	transactions
+		ifNotNil: [ :val | aCursor offset: aCursor offset + transactions size ].
+	aCursor hasMore: aCursor offset < result totalTransactions.
+	^ transactions
 ]
 
 { #category : #accessing }

@@ -16,24 +16,24 @@ PlaidItemEndpoint >> accessToken [
 
 { #category : #api }
 PlaidItemEndpoint >> get [
-	<endpoint: 'get'>
+	<path: 'get'>
 	<post>
 	^ PlaidItemResponse fromJson: self execute
 ]
 
 { #category : #endpoints }
 PlaidItemEndpoint >> publicToken [
-	^ self > PlaidPublicTokenEndpoint 
+	^ self / PlaidPublicTokenEndpoint 
 ]
 
 { #category : #api }
 PlaidItemEndpoint >> remove [
-	<endpoint: 'remove'>
+	<paht: 'remove'>
 	<post>
 	^ PlaidRemovedResponse fromJson: self execute
 ]
 
 { #category : #endpoints }
 PlaidItemEndpoint >> webhook [
-	^ self > PlaidItemWebhookEndpoint 
+	^ self / PlaidItemWebhookEndpoint 
 ]

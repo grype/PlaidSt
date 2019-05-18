@@ -11,7 +11,7 @@ PlaidItemWebhookEndpoint class >> endpointPath [
 
 { #category : #api }
 PlaidItemWebhookEndpoint >> updateUrl: anUrl [
-	<endpoint: 'update'>
+	<path: 'update'>
 	<post>
 	self dataAt: 'webhook' put: anUrl greaseString.
 	^ PlaidItemResponse fromJson: self execute

@@ -11,7 +11,7 @@ PlaidAuditCopyEndpoint class >> endpointPath [
 
 { #category : #api }
 PlaidAuditCopyEndpoint >> createWithAssetReportToken: anAssetReportToken auditorId: anAuditorId [
-	<endpoint: 'create'>
+	<path: 'create'>
 	<post>
 	data
 		at: #asset_report_token put: anAssetReportToken;
@@ -29,7 +29,7 @@ PlaidAuditCopyEndpoint >> initializeOn: aClient [
 
 { #category : #api }
 PlaidAuditCopyEndpoint >> removeAuditCopyWithToken: aToken [
-	<endpoint: 'remove'>
+	<path: 'remove'>
 	<post>
 	data
 		at: #audit_copy_token put: aToken.
