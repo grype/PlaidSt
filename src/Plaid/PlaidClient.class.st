@@ -160,7 +160,9 @@ PlaidClient >> clientName: anObject [
 { #category : #http }
 PlaidClient >> configureHttpClient: http [
 	super configureHttpClient: http.
-	http headerAt: 'Plaid-Version' put: self class apiVersion
+	http
+		headerAt: 'Plaid-Version' put: self class apiVersion;
+		contentWriter: [ :obj | ZnEntity json: obj asJson ]
 ]
 
 { #category : #accessing }
@@ -190,12 +192,6 @@ PlaidClient >> identity [
 { #category : #endpoints }
 PlaidClient >> income [
 	^ self / PlaidIncomeEndpoint 
-]
-
-{ #category : #initialization }
-PlaidClient >> initialize [
-	super initialize.
-	self contentWriter: [ :obj | ZnEntity json: obj asJson ]
 ]
 
 { #category : #endpoints }
