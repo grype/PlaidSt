@@ -43,6 +43,8 @@ Class {
 		'clientName'
 	],
 	#classVars : [
+		'DefaultClientName',
+		'DefaultDomain',
 		'DevelopmentEnvironment',
 		'DevelopmentUrl',
 		'ProductionEnvironment',
@@ -56,6 +58,41 @@ Class {
 { #category : #accessing }
 PlaidClient class >> apiVersion [
 	^ '2018-05-22'
+]
+
+{ #category : #accessing }
+PlaidClient class >> default [
+	| selector |
+	selector := self defaultDomain asSymbol.
+	"validate selector"
+	self class methods
+		detect: [ :each | 
+			each selector = selector
+				and: [ each category asSymbol = #'instance creation' ] ].
+	^ (self perform: selector)
+		clientName: DefaultClientName;
+		credentials: PlaidCredentials default;
+		yourself
+]
+
+{ #category : #accessing }
+PlaidClient class >> defaultClientName [
+	^ DefaultClientName
+]
+
+{ #category : #accessing }
+PlaidClient class >> defaultClientName: anObject [
+	DefaultClientName := anObject
+]
+
+{ #category : #accessing }
+PlaidClient class >> defaultDomain [
+	^ DefaultDomain
+]
+
+{ #category : #accessing }
+PlaidClient class >> defaultDomain: anObject [
+	DefaultDomain := anObject
 ]
 
 { #category : #'instance creation' }
@@ -81,6 +118,8 @@ PlaidClient class >> initialize [
 	SandboxUrl := ZnUrl fromString: 'https://sandbox.plaid.com/'.
 	DevelopmentUrl := ZnUrl fromString: 'https://development.plaid.com/'.
 	ProductionUrl := ZnUrl fromString: 'https://production.plaid.com/'.
+	DefaultClientName ifNil: [ DefaultClientName := '' ].
+	DefaultDomain ifNil: [ DefaultDomain := #sandbox ].
 	self initializeProductConstants
 ]
 
@@ -95,6 +134,29 @@ PlaidClient class >> initializeProductConstants [
 			value splitOn: '_' do: [ :each | key nextPutAll: each capitalized ].
 			key nextPutAll: 'Product'.
 			Smalltalk at: key contents asSymbol put: value ]
+]
+
+{ #category : #'class initialization' }
+PlaidClient class >> plaidCredentialSettingsOn: aBuilder [
+	<systemsettings>
+	(aBuilder group: #Plaid)
+		label: 'Plaid';
+		description: 'Plaid API Settings';
+		parent: #tools;
+		with: [ (aBuilder pickOne: #defaultDomain)
+				target: self;
+				order: 1;
+				label: 'Domain';
+				description: 'Default Domain';
+				domainValues:
+					{('Sandbox' -> #sandbox).
+					('Development' -> #development).
+					('Production' -> #production)}.
+			(aBuilder setting: #defaultClientName)
+				target: self;
+				order: 2;
+				label: 'Client Name';
+				description: 'Default Client Name' ]
 ]
 
 { #category : #'instance creation' }

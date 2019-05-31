@@ -22,8 +22,83 @@ Class {
 		'accessToken',
 		'clientId'
 	],
+	#classVars : [
+		'DefaultClientId',
+		'DefaultPublicKey',
+		'DefaultSecret'
+	],
 	#category : #'Plaid-Core'
 }
+
+{ #category : #accessing }
+PlaidCredentials class >> default [
+	^ self new
+		publicKey: DefaultPublicKey;
+		secret: DefaultSecret;
+		clientId: DefaultClientId;
+		yourself
+]
+
+{ #category : #accessing }
+PlaidCredentials class >> defaultClientId [
+	^ DefaultClientId
+]
+
+{ #category : #accessing }
+PlaidCredentials class >> defaultClientId: anObject [
+	DefaultClientId := anObject
+]
+
+{ #category : #accessing }
+PlaidCredentials class >> defaultPublicKey [
+	^ DefaultPublicKey
+]
+
+{ #category : #accessing }
+PlaidCredentials class >> defaultPublicKey: anObject [
+	DefaultPublicKey := anObject
+]
+
+{ #category : #accessing }
+PlaidCredentials class >> defaultSecret [
+	^ DefaultSecret
+]
+
+{ #category : #defaults }
+PlaidCredentials class >> defaultSecret: anObject [
+	DefaultSecret := anObject
+]
+
+{ #category : #'class initialization' }
+PlaidCredentials class >> initialize [
+	DefaultPublicKey ifNil: [ DefaultPublicKey := '' ].
+	DefaultSecret ifNil: [ DefaultSecret := '' ].
+	DefaultClientId ifNil: [ DefaultClientId := '' ]
+]
+
+{ #category : #settings }
+PlaidCredentials class >> plaidCredentialSettingsOn: aBuilder [
+	<systemsettings>
+	(aBuilder group: #PlaidCredentials)
+		label: 'Credentials';
+		description: 'Plaid API Credentials';
+		parent: #Plaid;
+		with: [ (aBuilder setting: #defaultClientId)
+				target: self;
+				order: 3;
+				label: 'Client ID';
+				description: 'Default Client ID'.
+			(aBuilder setting: #defaultPublicKey)
+				target: self;
+				order: 1;
+				label: 'Public Key';
+				description: 'Default Public key'.
+			(aBuilder setting: #defaultSecret)
+				target: self;
+				order: 2;
+				label: 'Secret';
+				description: 'Default Secret' ]
+]
 
 { #category : #comparing }
 PlaidCredentials >> = anObject [
