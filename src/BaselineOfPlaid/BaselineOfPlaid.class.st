@@ -12,7 +12,7 @@ BaselineOfPlaid >> baseline: spec [
 		do: [ 
 			spec repository: 'github://grype/PlaidSt/src'.
 			self setupDependenciesOn: spec.
-			spec package: #Plaid with: [ spec requires: #('Unrest' 'Seaside3' 'Magritte3' 'Magritte3AddOns') ].
+			spec package: #Plaid with: [ spec requires: #('Ethel' 'Seaside3' 'Magritte3' 'Magritte3AddOns') ].
 			spec group: 'default' with: #('Plaid') ]
 ]
 
