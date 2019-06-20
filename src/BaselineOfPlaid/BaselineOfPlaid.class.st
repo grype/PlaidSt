@@ -19,7 +19,7 @@ BaselineOfPlaid >> baseline: spec [
 { #category : #baselines }
 BaselineOfPlaid >> setupDependenciesOn: spec [
 	spec baseline: 'Ethel' with: [ spec repository: 'github://grype/Ethel' ].
-	spec baseline: 'Seaside3' with: [ spec repository: 'github://SeasideSt/Seaside:master/repository' ].
+	spec baseline: 'Seaside3' with: [ spec repository: 'github://SeasideSt/Seaside:v3.3.3/repository' ].
 	spec
 		configuration: 'Magritte3'
 		with: [ spec
