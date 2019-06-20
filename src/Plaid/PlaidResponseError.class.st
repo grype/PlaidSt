@@ -12,7 +12,7 @@ Internal Representation and Key Implementation Points.
 "
 Class {
 	#name : #PlaidResponseError,
-	#superclass : #AnObsoleteUnrestError,
+	#superclass : #WSError,
 	#instVars : [
 		'response'
 	],
