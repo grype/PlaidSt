@@ -3,14 +3,14 @@ Pharo Smalltalk Bindings for the Plaid API (https://www.plaid.com/docs).
 
 The whole available Plaid API is defined in the `PlaidClient` and various subclasses of `PlaidEndpoint`. Link support is provided via `JSPlaid`.
 
-Uses [Unrest](https://github.com/grype/unrest), [Seaside](https://github.com/SeasideSt/Seaside) for providing Link support, and [Magritte](https://github.com/magritte-metamodel/magritte) for models.
+Uses [Ethel](https://github.com/grype/Ethel), [Seaside](https://github.com/SeasideSt/Seaside) for providing Link support, and [Magritte](https://github.com/magritte-metamodel/magritte) for models.
 
 ### Installation
 ``` smalltalk
 Metacello
 	new
 		baseline: 'Plaid';
-		repository: 'github://grype/PlaidSt/src';
+		repository: 'github://grype/PlaidSt/';
 		onConflictUseLoaded;
 		load.
 ```
@@ -89,6 +89,10 @@ API calls may also raise an error, which could be at either the transport, SDK o
 ```smalltalk
 [client item get] on: Error do: [...]
 ```
+
+### Defaults
+
+All of the variables required to instantiate `PlaidClient` are wired up in Settings, making it possible to enter credentials and client name there, and then simply ask for `PlaidClient default`.
 
 ### Using Link with Seaside
 
