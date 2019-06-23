@@ -220,8 +220,8 @@ PlaidClient >> clientName: anObject [
 ]
 
 { #category : #http }
-PlaidClient >> configureHttpClient: http [
-	super configureHttpClient: http.
+PlaidClient >> configureOn: http [
+	super configureOn: http.
 	http
 		headerAt: 'Plaid-Version' put: self class apiVersion;
 		contentWriter: [ :obj | ZnEntity json: obj asJson ]
